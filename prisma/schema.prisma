@@ -1,0 +1,224 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Links {
+  id         String    @id @default(uuid())
+  url        String
+  note_id    String?
+  created_at DateTime? @default(now())
+  notes      Notes?    @relation(fields: [note_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  @@map("links")
+}
+
+model Notes {
+  id           String    @id @default(uuid())
+  title        String?
+  descriptions String?
+  time String?
+  user_id      String?
+  created_at   DateTime? @default(now())
+  updated_at   DateTime? @default(now())
+  users        Users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  links        Links[]
+  tags         Tags[]
+  @@map("notes")
+}
+
+model Permissions {
+  id                String              @id @default(uuid())
+  name              String?             @unique
+  descriptions      String?
+  created_at        DateTime?           @default(now())
+  updated_at        DateTime?           @default(now())
+  permissionsRoles PermissionRole[]
+  accountsPermissions AccountsPermissions[]
+  productsPermissions ProductsPermissions[]
+  @@map("permissions")
+}
+
+
+model PermissionRole {
+  id            String       @id @default(uuid())
+  role_id       String?
+  permission_id String?
+  created_at    DateTime?    @default(now())
+  permissions   Permissions? @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  roles         Roles?       @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  @@map("permissionRoles")
+}
+
+model Roles {
+  id                String              @id @default(uuid())
+  name              String?             @unique
+  descriptions      String?
+  created_at        DateTime?           @default(now())
+  updated_at        DateTime?           @default(now())
+  permissionsRoles PermissionRole[]
+  userRole       UserRole[]
+  @@map("roles")
+}
+
+model Tags {
+  id      String  @id @default(uuid())
+  name    String
+  note_id String?
+  user_id String?
+  users   Users?  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  notes   Notes?  @relation(fields: [note_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  @@map("tags")
+}
+
+model Products {
+  id      String  @id @default(uuid())
+  product    String
+  price String?
+  description String?
+  photo String?
+  time String?
+  created_at DateTime?      @default(now())
+  updated_at DateTime?      @default(now())
+  productsPermissions       ProductsPermissions[] 
+  ProductsFaq ProductsFaq[]
+  PhotosProducts PhotosProducts[]
+  ProductsReviwers ProductsReviwers[]
+  @@map("products")
+}
+
+model ProductsFaq {
+  id String @id @default(uuid())
+  Product_id String
+  faq_id String
+  faq Faq? @relation(fields: [faq_id], references: [id], onUpdate: NoAction)
+  products Products? @relation(fields: [Product_id], references: [id], onUpdate: NoAction)
+  @@map("productsFaq")
+}
+
+model Faq {
+  id      String  @id @default(uuid())
+  question String
+  answer String
+  created_at DateTime?      @default(now())
+  updated_at DateTime?      @default(now())
+  ProductsFaq ProductsFaq[]
+  @@map("faq")
+}
+
+model ProductsPermissions {
+  id String @id @default(uuid())
+  product_id String?
+  permission_id String?
+  permissions   Permissions? @relation(fields: [permission_id], references: [id], onUpdate: NoAction)
+  products         Products?       @relation(fields: [product_id], references: [id], onUpdate: NoAction)
+  @@map("productsPermissions")
+}
+
+
+model Photos {
+  id      String  @id @default(uuid())
+  link String
+  created_at DateTime?      @default(now())
+  updated_at DateTime?      @default(now())
+  PhotosProducts PhotosProducts[]
+  PhotosReviwers PhotosReviwers[]
+  @@map("photos")
+}
+
+model Reviwers {
+  id      String  @id @default(uuid())
+  name String
+  created_at DateTime?      @default(now())
+  updated_at DateTime?      @default(now())
+  PhotosReviwers PhotosReviwers[]
+  ProductsReviwers ProductsReviwers[]
+  @@map("reviwers")
+}
+model PhotosReviwers {
+  id String @id @default(uuid())
+  reviwers_id String?
+  photo_id String?
+  photos   Photos? @relation(fields: [photo_id], references: [id],onDelete: Cascade, onUpdate: NoAction)
+  reviwers         Reviwers?       @relation(fields: [reviwers_id],onDelete: Cascade, references: [id], onUpdate: NoAction)
+  @@map("photosReviwers")
+}
+model ProductsReviwers {
+  id String @id @default(uuid())
+  reviwers_id String?
+  product_id String?
+  products   Products? @relation(fields: [product_id], references: [id],onDelete: Cascade, onUpdate: NoAction)
+  reviwers         Reviwers?       @relation(fields: [reviwers_id],onDelete: Cascade, references: [id], onUpdate: NoAction)
+  @@map("productsReviwers")
+}
+
+model PhotosProducts {
+  id String @id @default(uuid())
+  product_id String?
+  photo_id String?
+  photos   Photos? @relation(fields: [photo_id], references: [id],onDelete: Cascade, onUpdate: NoAction)
+  products Products? @relation(fields: [product_id],onDelete: Cascade, references: [id], onUpdate: NoAction)
+  @@map("photosProducts")
+}
+
+
+model Accounts {
+  id          String       @id @default(uuid())
+  site        String?
+  tool        String?
+  email       String?
+  password    String?
+  created_at  DateTime?    @default(now())
+  updated_at  DateTime?    @default(now())
+  accounts AccountsPermissions[]
+  @@map("accounts")
+}
+
+model AccountsPermissions {
+  id            String       @id @default(uuid())
+  accounts_id       String?
+  permission_id String?
+  created_at    DateTime?    @default(now())
+  permissions   Permissions? @relation(fields: [permission_id], references: [id], onUpdate: NoAction)
+  accounts         Accounts?       @relation(fields: [accounts_id], references: [id], onUpdate: NoAction)
+  @@map("accountsPermissions")
+}
+
+model UserRole {
+  id         String    @id @default(uuid())
+  role_id    String?
+  user_id    String?
+  created_at DateTime? @default(now())
+  users      Users?    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  roles      Roles?    @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  @@map("userRole")
+}
+
+model Users {
+  id          String       @id @default(uuid()) 
+  name        String?
+  number        String?
+  status        String?
+  payment        DateTime?
+  email       String? @unique
+  password    String?
+  refresh_Token RefreshToken? 
+  created_at  DateTime?    @default(now())
+  updated_at  DateTime?    @default(now())
+  notes       Notes[]
+  tags        Tags[]
+  userRole UserRole[]
+  @@map("users")
+}
+
+
+model RefreshToken {
+  id String @id @default(uuid())
+  expiresIn Int 
+  Users Users @relation(fields: [userId], references: [id])
+  userId String @unique
+  @@map("refresh_Token")
+}
