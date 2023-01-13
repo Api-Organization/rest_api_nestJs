@@ -27,7 +27,7 @@ export class UsersService {
           name,
           email,
           number: number || 'Não informado',
-          password: enctyptedPassword,
+          password: await hash(password, 8),
           userRole: {
             create: {
               role_id: userRoleId,
@@ -42,16 +42,35 @@ export class UsersService {
       });
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.prismaService.users.findMany().then((users) =>
+      users.map((user) => {
+        delete user.password;
+
+        return user;
+      }),
+    );
   }
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return this.prismaService.users
+      .update({
+        where: { id },
+        data: {
+          name: updateUserDto.name,
+          email: updateUserDto.email,
+          number: updateUserDto.number,
+        },
+      })
+      .then((user) => {
+        delete user.password;
+
+        return user;
+      });
   }
 
   remove(id: number) {

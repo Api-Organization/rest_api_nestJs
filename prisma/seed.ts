@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { hash } from 'bcryptjs';
 const prisma = new PrismaClient();
 async function main() {
   // Create permissions
@@ -42,6 +43,25 @@ async function main() {
         role_id: admin.id,
       },
     });
+  });
+
+  // Create users
+  const { id: userRoleId } = await prisma.roles.findFirst({
+    where: { name: 'USER' },
+  });
+
+  await prisma.users.create({
+    data: {
+      name: 'Admin',
+      email: 'fernando.atr@outlook.com',
+      number: 'Não informado',
+      password: await hash('teste1', 8),
+      userRole: {
+        create: {
+          role_id: userRoleId,
+        },
+      },
+    },
   });
 
   console.log('Done!');
