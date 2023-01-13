@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Headers,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -25,8 +24,8 @@ export class UsersController {
   }
 
   @Get()
-  findAll(@Body() createUserDto: any, @Headers() headers: unknown) {
-    return this.usersService.findAll(createUserDto, headers);
+  findAll() {
+    return this.usersService.findAll();
   }
 
   @UseGuards(AccessTokenGuard)

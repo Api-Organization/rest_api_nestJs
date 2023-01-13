@@ -47,10 +47,6 @@ export class UsersService {
     //   });
   }
 
-  findAll(body, headers) {
-    return { body, headers };
-  }
-
   findOne(id: string) {
     return this.prismaService.users
       .findUnique({ where: { id } })
@@ -70,10 +66,6 @@ export class UsersService {
         return user;
       }),
     );
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
