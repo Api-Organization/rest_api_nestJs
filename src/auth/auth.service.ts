@@ -9,6 +9,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { hash, compare } from 'bcryptjs';
 import { AuthDto } from './dtos/auth';
+import * as argon2 from 'argon2';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +26,7 @@ export class AuthService {
 
     if (user) throw new ConflictException('This email is already registered.');
 
-    const encryptedPassword = await hash(createUserDto.password, 8);
+    const encryptedPassword = await this.hashData(createUserDto.password);
 
     const newUser = await this.usersService.create({
       ...createUserDto,
@@ -39,13 +40,14 @@ export class AuthService {
   }
 
   async signIn(authDto: AuthDto) {
-    const hashedPassword = await hash(authDto.password, 8);
-
     const user = await this.prismaService.users.findUnique({
       where: { email: authDto.email },
     });
     if (!user) throw new BadRequestException('User does not exist');
-    const passwordMatches = await compare(user.password, hashedPassword);
+    const passwordMatches = await argon2.verify(
+      user.password,
+      authDto.password,
+    );
     if (!passwordMatches)
       throw new BadRequestException('Password is incorrect');
     const tokens = await this.getTokens(user.id, user.name);
@@ -63,7 +65,7 @@ export class AuthService {
   }
 
   hashData(data: string) {
-    return hash(data, 8);
+    return argon2.hash(data);
   }
 
   async updateRefreshToken(userId: string, refreshToken: string) {
