@@ -10,33 +10,53 @@ export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { name, email, number, password } = createUserDto;
+    const { refresh_Token, ...userDto } = createUserDto;
 
-    const user = await this.prismaService.users.findFirst({ where: { email } });
-    const { id: userRoleId } = await this.prismaService.roles.findFirst({
-      where: { name: 'USER' },
+    return this.prismaService.users.create({
+      data: userDto,
     });
+    // const { name, email, number, password } = createUserDto;
 
-    if (user) throw new EmailAlreadyRegistered();
+    // const user = await this.prismaService.users.findFirst({ where: { email } });
+    // const { id: userRoleId } = await this.prismaService.roles.findFirst({
+    //   where: { name: 'USER' },
+    // });
 
-    const enctyptedPassword = await hash(password, 8);
+    // if (user) throw new EmailAlreadyRegistered();
 
+    // const enctyptedPassword = await hash(password, 8);
+
+    // return this.prismaService.users
+    //   .create({
+    //     data: {
+    //       name,
+    //       email,
+    //       number: number || 'Não informado',
+    //       password: enctyptedPassword,
+    //       userRole: {
+    //         create: {
+    //           role_id: userRoleId,
+    //         },
+    //       },
+    //     },
+    //   })
+    //   .then((user) => {
+    //     delete user.password;
+
+    //     return user;
+    //   });
+  }
+
+  findAll(body, headers) {
+    return { body, headers };
+  }
+
+  findOne(id: string) {
     return this.prismaService.users
-      .create({
-        data: {
-          name,
-          email,
-          number: number || 'Não informado',
-          password: await hash(password, 8),
-          userRole: {
-            create: {
-              role_id: userRoleId,
-            },
-          },
-        },
-      })
+      .findUnique({ where: { id } })
       .then((user) => {
         delete user.password;
+        delete user.refresh_Token;
 
         return user;
       });
