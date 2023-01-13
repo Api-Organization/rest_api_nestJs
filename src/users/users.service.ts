@@ -51,8 +51,15 @@ export class UsersService {
     return { body, headers };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string) {
+    return this.prismaService.users
+      .findUnique({ where: { id } })
+      .then((user) => {
+        delete user.password;
+        delete user.refresh_Token;
+
+        return user;
+      });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
