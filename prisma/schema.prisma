@@ -205,20 +205,11 @@ model Users {
   payment        DateTime?
   email       String? @unique
   password    String?
-  refresh_Token RefreshToken? 
+  refresh_Token String? 
   created_at  DateTime?    @default(now())
   updated_at  DateTime?    @default(now())
   notes       Notes[]
   tags        Tags[]
   userRole UserRole[]
   @@map("users")
-}
-
-
-model RefreshToken {
-  id String @id @default(uuid())
-  expiresIn Int 
-  Users Users @relation(fields: [userId], references: [id])
-  userId String @unique
-  @@map("refresh_Token")
 }
