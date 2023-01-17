@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsEmpty,
 } from 'class-validator';
+import { Permissions } from '@prisma/client';
 
 export class CreateUserDto {
   @IsString()
@@ -34,5 +35,5 @@ export class CreateUserDto {
   refresh_Token?: string;
 
   @IsEmpty()
-  userRole?: unknown;
+  permissions?: unknown;
 }

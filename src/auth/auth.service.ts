@@ -10,6 +10,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { AuthDto } from './dtos/auth';
 import * as argon2 from 'argon2';
+import { Permissions } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -23,14 +24,14 @@ export class AuthService {
     return argon2.hash(data);
   }
 
-  async getTokens(userId: string, email: string) {
+  async getTokens(userId: string, permissions: Array<Permissions>) {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(
-        { sub: userId, email },
+        { sub: userId, permissions },
         { expiresIn: '15m', secret: process.env.JWT_ACCESS_SECRET },
       ),
       this.jwtService.signAsync(
-        { sub: userId, email },
+        { sub: userId, permissions },
         { expiresIn: '7d', secret: process.env.JWT_REFRESH_SECRET },
       ),
     ]);
@@ -41,6 +42,9 @@ export class AuthService {
   async refreshToken(userId: string, refreshToken: string) {
     const user = await this.prismaService.users.findUnique({
       where: { id: userId },
+      include: {
+        permissions: true,
+      },
     });
 
     if (!user || !user.refresh_Token) {
@@ -56,7 +60,7 @@ export class AuthService {
       throw new ForbiddenException('Access Denied');
     }
 
-    const tokens = await this.getTokens(user.id, user.name);
+    const tokens = await this.getTokens(user.id, user.permissions);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
 
     return tokens;
@@ -82,12 +86,24 @@ export class AuthService {
 
     const encryptedPassword = await this.hashData(createUserDto.password);
 
+    const permission = await this.prismaService.permissions.findFirst({
+      where: { name: 'products_get' },
+    });
+
     const createdUser = await this.usersService.create({
       ...createUserDto,
+      permissions: {
+        connect: {
+          id: permission.id,
+        },
+      },
       password: encryptedPassword,
     });
 
-    const tokens = await this.getTokens(createdUser.id, createdUser.name);
+    const tokens = await this.getTokens(
+      createdUser.id,
+      createdUser.permissions,
+    );
     await this.updateRefreshToken(createdUser.id, tokens.refreshToken);
 
     return tokens;
@@ -96,6 +112,9 @@ export class AuthService {
   async signIn(authDto: AuthDto) {
     const user = await this.prismaService.users.findUnique({
       where: { email: authDto.email },
+      include: {
+        permissions: true,
+      },
     });
 
     if (!user) {
@@ -111,7 +130,7 @@ export class AuthService {
       throw new BadRequestException('Password is incorrect');
     }
 
-    const tokens = await this.getTokens(user.id, user.name);
+    const tokens = await this.getTokens(user.id, user.permissions);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
 
     return tokens;

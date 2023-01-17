@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { hash } from 'bcryptjs';
+import * as argon2 from 'argon2';
+
 const prisma = new PrismaClient();
 async function main() {
   // Create permissions
@@ -17,48 +18,40 @@ async function main() {
       {
         name: 'nichescrapper_get',
       },
-    ],
-  });
-
-  // Create roles
-  await prisma.roles.createMany({
-    data: [
       {
-        name: 'USER',
-      },
-      {
-        name: 'ADMIN',
+        name: 'products_get',
       },
     ],
-  });
-
-  // Link all permissions to admin role
-  const permissions = await prisma.permissions.findMany();
-  const admin = await prisma.roles.findUnique({ where: { name: 'ADMIN' } });
-
-  permissions.forEach(async (permission) => {
-    await prisma.permissionRole.create({
-      data: {
-        permission_id: permission.id,
-        role_id: admin.id,
-      },
-    });
   });
 
   // Create users
-  const { id: userRoleId } = await prisma.roles.findFirst({
-    where: { name: 'USER' },
+  const permission = await prisma.permissions.findFirst({
+    where: { name: 'products_get' },
+  });
+  const permission2 = await prisma.permissions.findFirst({
+    where: { name: 'adheart_get' },
   });
 
-  await prisma.users.create({
+  const user = await prisma.users.create({
     data: {
       name: 'Admin',
       email: 'fernando.atr@outlook.com',
       number: 'Não informado',
-      password: await hash('teste1', 8),
-      userRole: {
-        create: {
-          role_id: userRoleId,
+      password: await argon2.hash('teste1'),
+      permissions: {
+        connect: {
+          id: permission.id,
+        },
+      },
+    },
+  });
+
+  await prisma.users.update({
+    where: { id: user.id },
+    data: {
+      permissions: {
+        connect: {
+          id: permission2.id,
         },
       },
     },
