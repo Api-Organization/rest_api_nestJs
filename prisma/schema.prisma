@@ -2,6 +2,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -16,41 +20,15 @@ model Links {
 }
 
 model Notes {
-  id           String    @id @default(uuid())
-  title        String?
-  content String?
-  time         String?
-  user_id      String?
-  created_at   DateTime? @default(now())
-  updated_at   DateTime? @default(now())
-  users        Users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  links        Links[]
-  tags         Tags[]
-}
-
-model Tags {
-  id      String  @id @default(uuid())
-  name    String
-  note_id String?
-  user_id String?
-  users   Users?  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  notes   Notes?  @relation(fields: [note_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-}
-
-model Products {
-  id          String        @id @default(uuid())
-  name     String
-  price       String?
-  description String?
-  photo       String?
-  time        String?
-  stock       String?
-  created_at  DateTime?     @default(now())
-  updated_at  DateTime?     @default(now())
-  Permissions Permissions[]
-  Faq         Faq[]
-  Photos      Photos[]
-  Reviewers    Reviewers[]
+  id         String    @id @default(uuid())
+  title      String?
+  content    String?
+  time       String?
+  user_id    String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  users      Users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  links      Links[]
 }
 
 model Faq {
@@ -63,22 +41,22 @@ model Faq {
 }
 
 model Photos {
-  id         String     @id @default(uuid())
+  id         String      @id @default(uuid())
   link       String
-  created_at DateTime?  @default(now())
-  updated_at DateTime?  @default(now())
+  created_at DateTime?   @default(now())
+  updated_at DateTime?   @default(now())
   Products   Products[]
-  Reviewers   Reviewers[]
+  Reviewers  Reviewers[]
 }
 
 model Reviewers {
-  id         String     @id @default(uuid())
-  name       String
-  description  String?
-  created_at DateTime?  @default(now())
-  updated_at DateTime?  @default(now())
-  Photos     Photos[]
-  Products   Products[]
+  id          String     @id @default(uuid())
+  name        String
+  description String?
+  created_at  DateTime?  @default(now())
+  updated_at  DateTime?  @default(now())
+  Photos      Photos[]
+  Products    Products[]
 }
 
 model Accounts {
@@ -93,29 +71,131 @@ model Accounts {
 }
 
 model Permissions {
-  id           String     @id @default(uuid())
-  name         String?    @unique
+  id          String     @id @default(uuid())
+  name        String     @unique
   description String?
-  created_at   DateTime?  @default(now())
-  updated_at   DateTime?  @default(now())
-  Accounts     Accounts[]
-  Users        Users[]
-  Products     Products[]
+  created_at  DateTime?  @default(now())
+  updated_at  DateTime?  @default(now())
+  Accounts    Accounts[]
+  Users       Users[]
+  Products    Products[]
+}
+
+model Products {
+  id          String        @id @default(uuid())
+  name        String
+  price       String?
+  description String?
+  photo       String?
+  time        String?
+  active      Boolean?
+  stock       String?
+  created_at  DateTime?     @default(now())
+  updated_at  DateTime?     @default(now())
+  Permissions Permissions[]
+  Faq         Faq[]
+  Photos      Photos[]
+  Reviewers   Reviewers[]
+  Payments    Payments[]
 }
 
 model Users {
-  id            String        @id @default(uuid())
-  name          String?
-  number        String?
-  status        String?
-  payment       DateTime?
-  role          String?
-  email         String?       @unique
-  password      String?
-  permissions   Permissions[]
-  refresh_Token String?
-  created_at    DateTime?     @default(now())
-  updated_at    DateTime?     @default(now())
-  notes         Notes[]
-  tags          Tags[]
+  id                 String        @id @default(uuid())
+  stripe_customer_id String?
+  name               String
+  number             String?
+  status             String?
+  role               String?
+  email              String        @unique
+  password           String
+  permissions        Permissions[]
+  refresh_Token      String?
+  created_at         DateTime?     @default(now())
+  updated_at         DateTime?     @default(now())
+  notes              Notes[]
+  Payments           Payments[]
+  Discount          Discount[]
+}
+
+enum method {
+  CREDIT_CARD
+  DEBIT_CARD
+  BANK_SLIP
+  PIX
+}
+
+model Payments {
+  id         String    @id @default(uuid())
+  receiptId  String
+  method     method
+  status     String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  Users      Users     @relation(fields: [userId], references: [id])
+  userId     String
+  productId  String
+  products   Products  @relation(fields: [productId], references: [id])
+}
+
+model Subscription {
+  id                     String   @id @default(uuid())
+  userId                 String
+  stripe_subscription_id String
+  status                 String
+  active                 Boolean
+  current_period_start   DateTime
+  current_period_end     DateTime
+  cancel_at_period_end   Boolean
+  cancel_at              DateTime
+  canceled_at            DateTime
+  ended_at               DateTime
+  default_payment_method String
+  metadata               String
+}
+
+model Price {
+  id                 String @id @default(uuid())
+  subscription_id    String
+  stripe_price_id    String
+  stripe_product_id  String
+  amount             Int
+  label              String
+  description        String
+}
+
+model Adress {
+  id                 String @id @default(uuid())
+  billing_details_id String
+  city               String
+  country            String
+  postal_code        String
+  state              String
+  metadata           String
+}
+
+model Coupon { 
+  id                 String @id @default(uuid())
+  stripe_coupon_id   String
+  valid              Boolean
+  amount_off         Int
+  currency           String
+  duration           String
+  duration_in_months Int
+  max_redemptions    Int
+  redeem_by          DateTime
+  times_redeemed     Int
+  discount_id        String
+  metaddata          String
+}
+
+model Discount {
+  id                 String @id @default(uuid())
+  stripe_discount_id String
+  subscription_id    String
+  user_id            String
+  user               Users  @relation(fields: [user_id], references: [id])
+  start              DateTime
+  end                DateTime
+  promo_code         String
+  metadata           String
 }

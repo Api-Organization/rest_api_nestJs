@@ -10,6 +10,7 @@ import { AccountsModule } from './accounts/accounts.module';
 import { ReviewersModule } from './reviewers/reviewers.module';
 import { HtmlParseModule } from './html-parse/html-parse.module';
 import { AdheartModule } from './adheart/adheart.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AdheartModule } from './adheart/adheart.module';
     ReviewersModule,
     HtmlParseModule,
     AdheartModule,
+    PaymentModule,
   ],
   controllers: [],
 })

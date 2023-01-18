@@ -23,7 +23,16 @@ export class UsersService {
 
   findOne(id: string) {
     return this.prismaService.users
-      .findUnique({ where: { id } })
+      .findUnique({
+        where: { id },
+        include: {
+          Payments: {
+            include: {
+              products: true,
+            },
+          },
+        },
+      })
       .then((user) => {
         delete user.password;
         delete user.refresh_Token;

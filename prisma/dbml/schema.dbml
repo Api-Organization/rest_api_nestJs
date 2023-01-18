@@ -1,0 +1,169 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Links {
+  id String [pk]
+  url String [not null]
+  note_id String
+  created_at DateTime [default: `now()`]
+  notes Notes
+}
+
+Table Notes {
+  id String [pk]
+  title String
+  content String
+  time String
+  user_id String
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  users Users
+  links Links [not null]
+}
+
+Table Faq {
+  id String [pk]
+  question String [not null]
+  answer String [not null]
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  Products Products [not null]
+}
+
+Table Photos {
+  id String [pk]
+  link String [not null]
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  Products Products [not null]
+  Reviewers Reviewers [not null]
+}
+
+Table Reviewers {
+  id String [pk]
+  name String [not null]
+  description String
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  Photos Photos [not null]
+  Products Products [not null]
+}
+
+Table Accounts {
+  id String [pk]
+  site String
+  tool String
+  email String
+  password String
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  permissions Permissions [not null]
+}
+
+Table Permissions {
+  id String [pk]
+  name String [unique, not null]
+  description String
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  Accounts Accounts [not null]
+  Users Users [not null]
+  Products Products [not null]
+}
+
+Table Products {
+  id String [pk]
+  name String [not null]
+  price String
+  description String
+  photo String
+  time String
+  stock String
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  Permissions Permissions [not null]
+  Faq Faq [not null]
+  Photos Photos [not null]
+  Reviewers Reviewers [not null]
+  Payments Payments [not null]
+}
+
+Table Payments {
+  id String [pk]
+  receiptId String [not null]
+  method method [not null]
+  status String [not null]
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  Users Users [not null]
+  userId String [not null]
+  productId String [not null]
+  products Products [not null]
+}
+
+Table Users {
+  id String [pk]
+  name String [not null]
+  number String
+  status String
+  role String
+  email String [unique, not null]
+  password String [not null]
+  permissions Permissions [not null]
+  refresh_Token String
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  notes Notes [not null]
+  Payments Payments [not null]
+}
+
+Table FaqToProducts {
+  productsId String [ref: > Products.id]
+  faqId String [ref: > Faq.id]
+}
+
+Table PhotosToProducts {
+  productsId String [ref: > Products.id]
+  photosId String [ref: > Photos.id]
+}
+
+Table PhotosToReviewers {
+  reviewersId String [ref: > Reviewers.id]
+  photosId String [ref: > Photos.id]
+}
+
+Table ProductsToReviewers {
+  productsId String [ref: > Products.id]
+  reviewersId String [ref: > Reviewers.id]
+}
+
+Table AccountsToPermissions {
+  permissionsId String [ref: > Permissions.id]
+  accountsId String [ref: > Accounts.id]
+}
+
+Table PermissionsToUsers {
+  usersId String [ref: > Users.id]
+  permissionsId String [ref: > Permissions.id]
+}
+
+Table PermissionsToProducts {
+  productsId String [ref: > Products.id]
+  permissionsId String [ref: > Permissions.id]
+}
+
+Enum method {
+  CREDIT_CARD
+  DEBIT_CARD
+  BANK_SLIP
+  PIX
+}
+
+Ref: Links.note_id > Notes.id [delete: Cascade]
+
+Ref: Notes.user_id > Users.id [delete: No Action]
+
+Ref: Payments.userId > Users.id
+
+Ref: Payments.productId > Products.id
