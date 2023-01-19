@@ -1,12 +1,16 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
+import { Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { PaymentService } from './payment.service';
+import { Request } from 'express';
 
 @Controller('payment')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
-  @Post('create')
-  async createPayment(@Body() payment: { userId: string; productId: string }) {
-    return this.paymentService.createPayment(payment);
+  @Post('create-customer')
+  @UseGuards(AccessTokenGuard)
+  async createCustomer(@Req() req: Request) {
+    const userId = req.user['sub'];
+    return this.paymentService.createCustomer(userId);
   }
 }

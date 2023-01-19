@@ -114,7 +114,21 @@ model Users {
   updated_at         DateTime?     @default(now())
   notes              Notes[]
   Payments           Payments[]
-  Discount          Discount[]
+  Discount           Discount[]
+  Address            Address[]
+}
+
+model Address {
+  id                 String  @id @default(uuid())
+  billing_details_id String?
+  city               String
+  country            String
+  postal_code        String
+  state              String
+  line1              String
+  metadata           String?
+  userId             String
+  Users              Users   @relation(fields: [userId], references: [id])
 }
 
 enum method {
@@ -154,27 +168,17 @@ model Subscription {
 }
 
 model Price {
-  id                 String @id @default(uuid())
-  subscription_id    String
-  stripe_price_id    String
-  stripe_product_id  String
-  amount             Int
-  label              String
-  description        String
+  id                String @id @default(uuid())
+  subscription_id   String
+  stripe_price_id   String
+  stripe_product_id String
+  amount            Int
+  label             String
+  description       String
 }
 
-model Adress {
-  id                 String @id @default(uuid())
-  billing_details_id String
-  city               String
-  country            String
-  postal_code        String
-  state              String
-  metadata           String
-}
-
-model Coupon { 
-  id                 String @id @default(uuid())
+model Coupon {
+  id                 String   @id @default(uuid())
   stripe_coupon_id   String
   valid              Boolean
   amount_off         Int
@@ -185,15 +189,15 @@ model Coupon {
   redeem_by          DateTime
   times_redeemed     Int
   discount_id        String
-  metaddata          String
+  metadata           String
 }
 
 model Discount {
-  id                 String @id @default(uuid())
+  id                 String   @id @default(uuid())
   stripe_discount_id String
   subscription_id    String
   user_id            String
-  user               Users  @relation(fields: [user_id], references: [id])
+  user               Users    @relation(fields: [user_id], references: [id])
   start              DateTime
   end                DateTime
   promo_code         String

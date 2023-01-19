@@ -11,6 +11,7 @@ import { ReviewersModule } from './reviewers/reviewers.module';
 import { HtmlParseModule } from './html-parse/html-parse.module';
 import { AdheartModule } from './adheart/adheart.module';
 import { PaymentModule } from './payment/payment.module';
+import { StripeModule } from './stripe/stripe.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { PaymentModule } from './payment/payment.module';
     HtmlParseModule,
     AdheartModule,
     PaymentModule,
+    StripeModule,
   ],
   controllers: [],
 })
