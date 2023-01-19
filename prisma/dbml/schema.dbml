@@ -107,6 +107,24 @@ Table Users {
   Payments Payments [not null]
   Discount Discount [not null]
   Address Address [not null]
+  Subscription Subscription [not null]
+}
+
+Table Subscription {
+  id String [pk]
+  userId String [not null]
+  stripe_subscription_id String [not null]
+  status String
+  active Boolean [not null]
+  current_period_start DateTime
+  current_period_end DateTime
+  cancel_at_period_end Boolean [not null]
+  cancel_at DateTime
+  canceled_at DateTime
+  ended_at DateTime
+  default_payment_method String
+  metadata String
+  Users Users [not null]
 }
 
 Table Address {
@@ -133,22 +151,6 @@ Table Payments {
   userId String [not null]
   productId String [not null]
   products Products [not null]
-}
-
-Table Subscription {
-  id String [pk]
-  userId String [not null]
-  stripe_subscription_id String [not null]
-  status String [not null]
-  active Boolean [not null]
-  current_period_start DateTime [not null]
-  current_period_end DateTime [not null]
-  cancel_at_period_end Boolean [not null]
-  cancel_at DateTime [not null]
-  canceled_at DateTime [not null]
-  ended_at DateTime [not null]
-  default_payment_method String [not null]
-  metadata String [not null]
 }
 
 Table Price {
@@ -233,6 +235,8 @@ Enum method {
 Ref: Links.note_id > Notes.id [delete: Cascade]
 
 Ref: Notes.user_id > Users.id [delete: No Action]
+
+Ref: Subscription.userId > Users.id
 
 Ref: Address.userId > Users.id
 

@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
 import { StripeService } from '@/stripe/stripe.service';
 
@@ -27,5 +31,57 @@ export class PaymentService {
     });
 
     return;
+  }
+
+  async createSubscription(userId: string, priceId: string) {
+    const user = await this.prismaService.users.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user.stripe_customer_id) {
+      throw new Error('User has no stripe customer id');
+    }
+
+    const subscription = await this.paymentProvider.createSubscription({
+      stripeCustomerId: user.stripe_customer_id,
+      priceId,
+    });
+
+    await this.prismaService.users.update({
+      where: { id: user.id },
+      data: {
+        Subscription: {
+          create: {
+            active: false,
+            stripe_subscription_id: subscription.subscriptionId,
+            cancel_at_period_end: false,
+          },
+        },
+      },
+      include: { Subscription: true },
+    });
+
+    return subscription.clientSecret;
+  }
+
+  async updateSubscription(type: string, subscriptionId: string) {
+    if (type !== 'invoice.payment_succeeded')
+      throw new BadRequestException('Invalid event type');
+
+    const subscription = await this.prismaService.subscription.findFirst({
+      where: { stripe_subscription_id: subscriptionId },
+    });
+
+    if (!subscription) {
+      throw new NotFoundException('Subscription not found');
+    }
+
+    return await this.prismaService.subscription.update({
+      where: { id: subscription.id },
+      data: {
+        status: 'active',
+        active: true,
+      },
+    });
   }
 }

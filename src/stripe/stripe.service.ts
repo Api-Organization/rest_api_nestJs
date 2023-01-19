@@ -14,7 +14,7 @@ export class StripeService implements OnModuleInit {
 
   async onModuleInit() {
     this.stripe = new Stripe(
-      'sk_test_51MCE8XIrC6uJHsGlAy6lLaY94zKpjtIDFfP14zuZGaBk86D4aU0cKRgssWmuM104PHD20nNTJdQjqVipy4PdVpBg00ccXN7rty',
+      'sk_test_51MS5GSELi39C3IeKRBDZKgHWd0CmndNiOLxnebKI6GzJTNTE2Gn9VeYJrcD4Lh7kjtsghLNjRff45LKCs2sDfk1z00slt6ByzP',
       {
         apiVersion: '2022-11-15',
       },
@@ -49,5 +49,27 @@ export class StripeService implements OnModuleInit {
         state,
       },
     });
+  }
+
+  async createSubscription({
+    stripeCustomerId,
+    priceId,
+  }: {
+    stripeCustomerId: string;
+    priceId: string;
+  }) {
+    const subscription = await this.stripe.subscriptions.create({
+      customer: stripeCustomerId,
+      items: [{ price: priceId }],
+      payment_behavior: 'default_incomplete',
+      payment_settings: { save_default_payment_method: 'on_subscription' },
+      expand: ['latest_invoice.payment_intent'],
+    });
+
+    return {
+      subscriptionId: subscription.id,
+      clientSecret: (subscription.latest_invoice as { [key: string]: any })
+        .payment_intent.client_secret,
+    };
   }
 }

@@ -116,6 +116,24 @@ model Users {
   Payments           Payments[]
   Discount           Discount[]
   Address            Address[]
+  Subscription       Subscription[]
+}
+
+model Subscription {
+  id                     String   @id @default(uuid())
+  userId                 String
+  stripe_subscription_id String
+  status                 String?
+  active                 Boolean
+  current_period_start   DateTime?
+  current_period_end     DateTime?
+  cancel_at_period_end   Boolean
+  cancel_at              DateTime?
+  canceled_at            DateTime?
+  ended_at               DateTime?
+  default_payment_method String?
+  metadata               String?
+  Users                  Users    @relation(fields: [userId], references: [id])
 }
 
 model Address {
@@ -149,22 +167,6 @@ model Payments {
   userId     String
   productId  String
   products   Products  @relation(fields: [productId], references: [id])
-}
-
-model Subscription {
-  id                     String   @id @default(uuid())
-  userId                 String
-  stripe_subscription_id String
-  status                 String
-  active                 Boolean
-  current_period_start   DateTime
-  current_period_end     DateTime
-  cancel_at_period_end   Boolean
-  cancel_at              DateTime
-  canceled_at            DateTime
-  ended_at               DateTime
-  default_payment_method String
-  metadata               String
 }
 
 model Price {
