@@ -65,9 +65,6 @@ export class PaymentService {
   }
 
   async updateSubscription(type: string, subscriptionId: string) {
-    if (type !== 'invoice.payment_succeeded')
-      throw new BadRequestException('Invalid event type');
-
     const subscription = await this.prismaService.subscription.findFirst({
       where: { stripe_subscription_id: subscriptionId },
     });
@@ -76,12 +73,24 @@ export class PaymentService {
       throw new NotFoundException('Subscription not found');
     }
 
-    return await this.prismaService.subscription.update({
-      where: { id: subscription.id },
-      data: {
-        status: 'active',
-        active: true,
-      },
-    });
+    if (type === 'invoice.payment_failed') {
+      return await this.prismaService.subscription.update({
+        where: { id: subscription.id },
+        data: {
+          status: 'incomplete',
+          active: false,
+        },
+      });
+    }
+
+    if (type !== 'invoice.payment_succeeded') {
+      return await this.prismaService.subscription.update({
+        where: { id: subscription.id },
+        data: {
+          status: 'active',
+          active: true,
+        },
+      });
+    }
   }
 }
