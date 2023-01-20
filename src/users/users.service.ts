@@ -1,3 +1,4 @@
+import { NodemailerService } from '@/nodemailer/nodemailer.service';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { hash } from 'bcryptjs';
@@ -8,10 +9,23 @@ import { EmailAlreadyRegistered } from './exceptions/email-already-registered';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly nodemailerService: NodemailerService,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const { refresh_Token, ...userDto } = createUserDto;
+
+    if (!userDto.password) {
+      userDto.password = Math.random().toString(36).slice(-8);
+
+      await this.nodemailerService.sendEmail({
+        to: userDto.email,
+        subject: 'Sua senha',
+        mensagem: `Sua senha é ${userDto.password}`,
+      });
+    }
 
     return this.prismaService.users.create({
       data: userDto,
