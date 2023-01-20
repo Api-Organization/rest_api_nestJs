@@ -106,6 +106,7 @@ model Users {
   number             String?
   status             String?
   role               String?
+  isEmailConfirmed   Boolean?
   email              String        @unique
   password           String
   permissions        Permissions[]

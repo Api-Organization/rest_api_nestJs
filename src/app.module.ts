@@ -12,6 +12,8 @@ import { HtmlParseModule } from './html-parse/html-parse.module';
 import { AdheartModule } from './adheart/adheart.module';
 import { PaymentModule } from './payment/payment.module';
 import { StripeModule } from './stripe/stripe.module';
+import { NodemailerModule } from './nodemailer/nodemailer.module';
+import { EmailConfirmationModule } from './email-confirmation/email-confirmation.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { StripeModule } from './stripe/stripe.module';
     AdheartModule,
     PaymentModule,
     StripeModule,
+    NodemailerModule,
+    EmailConfirmationModule,
   ],
   controllers: [],
 })

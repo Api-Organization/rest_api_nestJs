@@ -73,4 +73,17 @@ export class UsersService {
       where: { id },
     });
   }
+
+  async getByEmail(email: string) {
+    return this.prismaService.users.findUnique({
+      where: { email },
+    });
+  }
+
+  async markEmailAsConfirmed(email: string) {
+    return this.prismaService.users.update({
+      where: { email },
+      data: { isEmailConfirmed: true },
+    });
+  }
 }
