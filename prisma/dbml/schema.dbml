@@ -97,6 +97,7 @@ Table Users {
   number String
   status String
   role String
+  isEmailConfirmed Boolean
   email String [unique, not null]
   password String [not null]
   permissions Permissions [not null]

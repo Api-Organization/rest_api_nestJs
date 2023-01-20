@@ -14,10 +14,14 @@ import { Req, UseGuards } from '@nestjs/common/decorators';
 import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
 import { PermissionGuard } from '@/common/guards/permission.guard';
 import { Request } from 'express';
+import { EmailConfirmationService } from '@/email-confirmation/email-confirmation.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly emailConfirmationService: EmailConfirmationService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -33,9 +37,13 @@ export class UsersController {
 
   @UseGuards(AccessTokenGuard)
   @Get('me')
-  findOne(@Req() req: Request) {
+  async findOne(@Req() req: Request) {
     const userId = req.user['sub'];
-    return this.usersService.findOne(userId);
+    const user = await this.usersService.findOne(userId);
+    // const email = await this.emailConfirmationService.sendVerificationLink(
+    //   user.email,
+    // );
+    return { user };
   }
 
   @UseGuards(AccessTokenGuard)
