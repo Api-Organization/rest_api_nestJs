@@ -57,15 +57,15 @@ export class CreateReviewerDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(2)
-  Faq: Prisma.PhotosCreateNestedManyWithoutReviewersInput;
+  Faq: Prisma.FilesCreateNestedManyWithoutReviewersInput;
 
   @IsString()
   @IsNotEmpty()
   @MinLength(2)
-  Photos: Prisma.PhotosCreateNestedManyWithoutReviewersInput;
+  Photos: Prisma.FilesCreateNestedManyWithoutReviewersInput;
 
   @IsString()
   @IsNotEmpty()
   @MinLength(2)
-  Reviewers: Prisma.PhotosCreateNestedManyWithoutReviewersInput;
+  Reviewers: Prisma.FilesCreateNestedManyWithoutReviewersInput;
 }

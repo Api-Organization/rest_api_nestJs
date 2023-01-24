@@ -40,7 +40,7 @@ model Faq {
   Products   Products[]
 }
 
-model Photos {
+model Files {
   id         String      @id @default(uuid())
   link       String
   created_at DateTime?   @default(now())
@@ -55,7 +55,7 @@ model Reviewers {
   description String?
   created_at  DateTime?  @default(now())
   updated_at  DateTime?  @default(now())
-  Photos      Photos[]
+  Files      Files[]
   Products    Products[]
 }
 
@@ -94,7 +94,7 @@ model Products {
   updated_at  DateTime?     @default(now())
   Permissions Permissions[]
   Faq         Faq[]
-  Photos      Photos[]
+  Files      Files[]
   Reviewers   Reviewers[]
   Payments    Payments[]
 }

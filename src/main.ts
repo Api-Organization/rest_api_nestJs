@@ -8,8 +8,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
-  console.log('chegou aqui 2');
-
   await app.enableCors({ origin: '*' });
 
   app.setBaseViewsDir(join(__dirname, '..', 'src', 'views'));

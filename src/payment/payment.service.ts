@@ -55,6 +55,7 @@ export class PaymentService {
             active: false,
             stripe_subscription_id: subscription.subscriptionId,
             cancel_at_period_end: false,
+            status: 'incomplete',
           },
         },
       },

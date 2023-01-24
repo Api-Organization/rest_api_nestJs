@@ -14,6 +14,8 @@ import { PaymentModule } from './payment/payment.module';
 import { StripeModule } from './stripe/stripe.module';
 import { NodemailerModule } from './nodemailer/nodemailer.module';
 import { EmailConfirmationModule } from './email-confirmation/email-confirmation.module';
+import { FilesModule } from './files/files.module';
+import { MulterModule } from './multer/multer.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { EmailConfirmationModule } from './email-confirmation/email-confirmation
     StripeModule,
     NodemailerModule,
     EmailConfirmationModule,
+    FilesModule,
+    MulterModule,
   ],
   controllers: [],
 })

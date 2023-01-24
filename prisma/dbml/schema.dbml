@@ -31,7 +31,7 @@ Table Faq {
   Products Products [not null]
 }
 
-Table Photos {
+Table Files {
   id String [pk]
   link String [not null]
   created_at DateTime [default: `now()`]
@@ -46,7 +46,7 @@ Table Reviewers {
   description String
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]
-  Photos Photos [not null]
+  Files Files [not null]
   Products Products [not null]
 }
 
@@ -85,7 +85,7 @@ Table Products {
   updated_at DateTime [default: `now()`]
   Permissions Permissions [not null]
   Faq Faq [not null]
-  Photos Photos [not null]
+  Files Files [not null]
   Reviewers Reviewers [not null]
   Payments Payments [not null]
 }
@@ -196,14 +196,14 @@ Table FaqToProducts {
   faqId String [ref: > Faq.id]
 }
 
-Table PhotosToProducts {
+Table FilesToProducts {
   productsId String [ref: > Products.id]
-  photosId String [ref: > Photos.id]
+  filesId String [ref: > Files.id]
 }
 
-Table PhotosToReviewers {
+Table FilesToReviewers {
   reviewersId String [ref: > Reviewers.id]
-  photosId String [ref: > Photos.id]
+  filesId String [ref: > Files.id]
 }
 
 Table ProductsToReviewers {
