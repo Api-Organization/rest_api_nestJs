@@ -12,9 +12,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Req, UseGuards } from '@nestjs/common/decorators';
 import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
-import { PermissionGuard } from '@/common/guards/permission.guard';
 import { Request } from 'express';
 import { EmailConfirmationService } from '@/email-confirmation/email-confirmation.service';
+import { CreateAddressDTO } from './dto/create-address.dto';
 
 @Controller('users')
 export class UsersController {
@@ -26,6 +26,16 @@ export class UsersController {
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Post('create-address')
+  createAddress(
+    @Req() req: Request,
+    @Body() createAddressDto: CreateAddressDTO,
+  ) {
+    const userId = req.user['sub'];
+    return this.usersService.createAddress(userId, createAddressDto);
   }
 
   // @UseGuards(AccessTokenGuard, PermissionGuard(['products_get', 'adheart_get']))

@@ -1,18 +1,42 @@
 import { NodemailerService } from '@/nodemailer/nodemailer.service';
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
-import { hash } from 'bcryptjs';
-import { truncate } from 'fs';
+import { ConflictException, Injectable } from '@nestjs/common';
+import { CreateAddressDTO } from './dto/create-address.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { EmailAlreadyRegistered } from './exceptions/email-already-registered';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly nodemailerService: NodemailerService,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
+
+  async createAddress(userId: string, createAddress: CreateAddressDTO) {
+    const address = await this.prismaService.users
+      .findUnique({
+        include: {
+          Address: true,
+        },
+        where: { id: userId },
+      })
+      .then((res) => res.Address);
+
+    if (address.length > 0)
+      throw new ConflictException('Address already created.');
+
+    return this.prismaService.address.create({
+      data: {
+        city: createAddress.city,
+        country: createAddress.country,
+        line1: createAddress.street_address,
+        postal_code: createAddress.postal_code,
+        state: createAddress.state,
+        Users: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+  }
 
   async create(createUserDto: CreateUserDto) {
     const { refresh_Token, ...userDto } = createUserDto;
