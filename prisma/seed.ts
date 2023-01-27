@@ -7,7 +7,8 @@ async function main() {
   await prisma.products.createMany({
     data: [
       {
-        name: 'AdHeart - 1 Mês',
+        name: 'AdHeart',
+        time: '1 mês',
         description:
           'AdHeart é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -15,7 +16,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adheart.png',
       },
       {
-        name: 'AdHeart - 3 Meses',
+        name: 'AdHeart',
+        time: '3 meses',
         description:
           'AdHeart é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -23,7 +25,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adheart.png',
       },
       {
-        name: 'AdHeart - 6 Meses',
+        name: 'AdHeart',
+        time: '6 meses',
         description:
           'AdHeart é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -31,7 +34,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adheart.png',
       },
       {
-        name: 'AdHeart - 1 Ano',
+        name: 'AdHeart ',
+        time: '12 meses',
         description:
           'AdHeart é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -39,7 +43,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adheart.png',
       },
       {
-        name: 'Adserea - 1 Mês',
+        name: 'Adserea',
+        time: '1 mês',
         description:
           'Adserea é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -47,7 +52,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adserea.png',
       },
       {
-        name: 'Adserea - 3 Meses',
+        name: 'Adserea',
+        time: '3 meses',
         description:
           'Adserea é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -55,7 +61,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adserea.png',
       },
       {
-        name: 'Adserea - 6 Meses',
+        name: 'Adserea',
+        time: '6 meses',
         description:
           'Adserea é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -63,7 +70,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adserea.png',
       },
       {
-        name: 'Adserea - 1 Ano',
+        name: 'Adserea',
+        time: '12 meses',
         description:
           'Adserea é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -71,7 +79,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adserea.png',
       },
       {
-        name: 'BigSpy - 1 Mês',
+        name: 'BigSpy',
+        time: '1 mês',
         description:
           'BigSpy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -79,7 +88,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/bigspy.webp',
       },
       {
-        name: 'BigSpy - 3 Meses',
+        name: 'BigSpy',
+        time: '3 meses',
         description:
           'BigSpy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -87,7 +97,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/bigspy.webp',
       },
       {
-        name: 'BigSpy - 6 Meses',
+        name: 'BigSpy',
+        time: '6 meses',
         description:
           'BigSpy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -95,7 +106,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/bigspy.webp',
       },
       {
-        name: 'BigSpy - 1 Ano',
+        name: 'BigSpy',
+        time: '12 meses',
         description:
           'BigSpy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -103,7 +115,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/bigspy.webp',
       },
       {
-        name: 'Nichescrapper - 1 Mês',
+        name: 'Nichescrapper',
+        time: '1 mês',
         description:
           'Nichescrapper é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -111,7 +124,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/nichescraper.png',
       },
       {
-        name: 'Nichescrapper - 3 Meses',
+        name: 'Nichescrapper',
+        time: '3 meses',
         description:
           'Nichescrapper é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -119,7 +133,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/nichescraper.png',
       },
       {
-        name: 'Nichescrapper - 6 Meses',
+        name: 'Nichescrapper',
+        time: '6 meses',
         description:
           'Nichescrapper é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -127,7 +142,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/nichescraper.png',
       },
       {
-        name: 'Nichescrapper - 1 Ano',
+        name: 'Nichescrapper',
+        time: '12 meses',
         description:
           'Nichescrapper é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -135,7 +151,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/nichescraper.png',
       },
       {
-        name: 'Adspy - 1 Mês',
+        name: 'Adspy',
+        time: '1 mês',
         description:
           'Adspy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -143,15 +160,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adspy.png',
       },
       {
-        name: 'Adspy - 1 Mês',
-        description:
-          'Adspy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
-        active: true,
-        price: 'R$ 49,90',
-        photo: 'https://www.webspy.com.br/uploads/adspy.png',
-      },
-      {
-        name: 'Adspy - 3 Meses',
+        name: 'Adspy',
+        time: '3 meses',
         description:
           'Adspy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -159,7 +169,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adspy.png',
       },
       {
-        name: 'Adspy - 6 Meses',
+        name: 'Adspy',
+        time: '6 meses',
         description:
           'Adspy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -167,7 +178,8 @@ async function main() {
         photo: 'https://www.webspy.com.br/uploads/adspy.png',
       },
       {
-        name: 'Adspy - 1 Ano',
+        name: 'Adspy',
+        time: '12 meses',
         description:
           'Adspy é um software de automação de marketing que permite que você crie anúncios de alta qualidade em minutos, sem precisar de conhecimentos técnicos.',
         active: true,
@@ -250,83 +262,86 @@ async function main() {
   });
 
   const adheartOneMonth = await prisma.products.findFirst({
-    where: { name: 'Adheart - 1 Mês' },
+    where: {
+      name: 'AdHeart',
+      time: '1 mês',
+    },
   });
 
   const adheartthreeMonth = await prisma.products.findFirst({
-    where: { name: 'AdHeart - 3 Meses' },
+    where: { name: 'AdHeart', time: '3 meses' },
   });
 
   const adheartSixMonth = await prisma.products.findFirst({
-    where: { name: 'Adheart - 6 Meses' },
+    where: { name: 'Adheart', time: '6 meses' },
   });
 
   const adheartOneYear = await prisma.products.findFirst({
-    where: { name: 'Adheart - 1 Ano' },
+    where: { name: 'Adheart', time: '12 meses' },
   });
 
   const nichescrapperOneMonth = await prisma.products.findFirst({
-    where: { name: 'Nichescrapper - 1 Mês' },
+    where: { name: 'Nichescrapper', time: '1 mês' },
   });
 
   const nichescrapperThreeMonth = await prisma.products.findFirst({
-    where: { name: 'Nichescrapper - 3 Meses' },
+    where: { name: 'Nichescrapper', time: '3 meses' },
   });
 
   const nichescrapperSixMonth = await prisma.products.findFirst({
-    where: { name: 'Nichescrapper - 6 Meses' },
+    where: { name: 'Nichescrapper', time: '6 meses' },
   });
 
   const nichescrapperOneYear = await prisma.products.findFirst({
-    where: { name: 'Nichescrapper - 1 Ano' },
+    where: { name: 'Nichescrapper', time: '12 meses' },
   });
 
   const adspyOneMonth = await prisma.products.findFirst({
-    where: { name: 'Adspy - 1 Mês' },
+    where: { name: 'Adspy', time: '1 mês' },
   });
 
   const adspyThreeMonth = await prisma.products.findFirst({
-    where: { name: 'Adspy - 3 Meses' },
+    where: { name: 'Adspy', time: '3 meses' },
   });
 
   const adspySixMonth = await prisma.products.findFirst({
-    where: { name: 'Adspy - 6 Meses' },
+    where: { name: 'Adspy', time: '6 meses' },
   });
 
   const adspyOneYear = await prisma.products.findFirst({
-    where: { name: 'Adspy - 1 Ano' },
+    where: { name: 'Adspy', time: '12 meses' },
   });
 
   const bigspyOneMonth = await prisma.products.findFirst({
-    where: { name: 'Bigspy - 1 Mês' },
+    where: { name: 'Bigspy', time: '1 mês' },
   });
 
   const bigspyThreeMonth = await prisma.products.findFirst({
-    where: { name: 'Bigspy - 3 Meses' },
+    where: { name: 'Bigspy', time: '3 meses' },
   });
 
   const bigspySixMonth = await prisma.products.findFirst({
-    where: { name: 'Bigspy - 6 Meses' },
+    where: { name: 'Bigspy', time: '6 meses' },
   });
 
   const bigspyOneYear = await prisma.products.findFirst({
-    where: { name: 'Bigspy - 1 Ano' },
+    where: { name: 'Bigspy', time: '12 meses' },
   });
 
   const adsereaOneMonth = await prisma.products.findFirst({
-    where: { name: 'Adserea - 1 Mês' },
+    where: { name: 'Adserea', time: '1 mês' },
   });
 
   const adsereaThreeMonth = await prisma.products.findFirst({
-    where: { name: 'Adserea - 3 Meses' },
+    where: { name: 'Adserea', time: '3 meses' },
   });
 
   const adsereaSixMonth = await prisma.products.findFirst({
-    where: { name: 'Adserea - 6 Meses' },
+    where: { name: 'Adserea', time: '6 meses' },
   });
 
   const adsereaOneYear = await prisma.products.findFirst({
-    where: { name: 'Adserea - 1 Ano' },
+    where: { name: 'Adserea', time: '12 meses' },
   });
 
   const updateAdheartOneMonth = await prisma.permissions.update({
@@ -621,6 +636,65 @@ async function main() {
       },
     ],
   });
+
+  const question = await prisma.faq.findFirst({
+    where: { question: 'Porque o preço é tão baixo?' },
+  });
+
+  const question2 = await prisma.faq.findFirst({
+    where: { question: 'Tenho limite de uso?' },
+  });
+
+  const question3 = await prisma.faq.findFirst({
+    where: { question: 'Como Funciona o acesso?' },
+  });
+
+  const question4 = await prisma.faq.findFirst({
+    where: { question: 'Preciso ter uma conta para comprar?' },
+  });
+
+  const findAllProducts = await prisma.products.findMany();
+
+  await prisma.$transaction(
+    findAllProducts.map((product) =>
+      prisma.faq.update({
+        where: { id: question.id },
+        data: {
+          Products: { connect: { id: product.id } },
+        },
+      }),
+    ),
+  );
+  await prisma.$transaction(
+    findAllProducts.map((product) =>
+      prisma.faq.update({
+        where: { id: question2.id },
+        data: {
+          Products: { connect: { id: product.id } },
+        },
+      }),
+    ),
+  );
+  await prisma.$transaction(
+    findAllProducts.map((product) =>
+      prisma.faq.update({
+        where: { id: question3.id },
+        data: {
+          Products: { connect: { id: product.id } },
+        },
+      }),
+    ),
+  );
+  await prisma.$transaction(
+    findAllProducts.map((product) =>
+      prisma.faq.update({
+        where: { id: question4.id },
+        data: {
+          Products: { connect: { id: product.id } },
+        },
+      }),
+    ),
+  );
 
   console.log('Done!');
 }
