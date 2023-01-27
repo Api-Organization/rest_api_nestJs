@@ -12,4 +12,8 @@ export class SendEmailDto {
   @IsString()
   @IsNotEmpty()
   mensagem: string;
+
+  @IsString()
+  @IsNotEmpty()
+  template: string;
 }

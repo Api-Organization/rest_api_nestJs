@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { NodemailerService } from './nodemailer.service';
 import { NodemailerController } from './nodemailer.controller';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -20,6 +21,13 @@ import { MailerModule } from '@nestjs-modules/mailer';
       defaults: {
         // configurações que podem ser padrões
         from: '"',
+      },
+      template: {
+        dir: `${process.cwd()}/src/views`,
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
       },
     }),
   ],

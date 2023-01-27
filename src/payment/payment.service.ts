@@ -85,6 +85,8 @@ export class PaymentService {
     }
 
     if (type !== 'invoice.payment_succeeded') {
+
+
       return await this.prismaService.subscription.update({
         where: { id: subscription.id },
         data: {

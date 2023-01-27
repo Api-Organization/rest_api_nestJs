@@ -17,16 +17,6 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const { refresh_Token, ...userDto } = createUserDto;
 
-    if (!userDto.password) {
-      userDto.password = Math.random().toString(36).slice(-8);
-
-      await this.nodemailerService.sendEmail({
-        to: userDto.email,
-        subject: 'Sua senha',
-        mensagem: `Sua senha é ${userDto.password}`,
-      });
-    }
-
     return this.prismaService.users.create({
       data: userDto,
       include: {
@@ -40,6 +30,12 @@ export class UsersService {
       .findUnique({
         where: { id },
         include: {
+          permissions: {
+            select: {
+              name: true,
+              Products: true,
+            },
+          },
           Payments: {
             include: {
               products: true,

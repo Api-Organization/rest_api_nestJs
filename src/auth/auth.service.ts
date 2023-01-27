@@ -11,12 +11,14 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthDto } from './dtos/auth';
 import * as argon2 from 'argon2';
 import { Permissions } from '@prisma/client';
+import { NodemailerService } from '@/nodemailer/nodemailer.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly prismaService: PrismaService,
+    private readonly nodemailerService: NodemailerService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -84,7 +86,11 @@ export class AuthService {
 
     if (user) throw new ConflictException('This email is already registered.');
 
-    const encryptedPassword = await this.hashData(createUserDto.password);
+    const randomPassword = Math.random().toString(36).slice(-8);
+
+    const encryptedPassword = await this.hashData(
+      createUserDto.password || randomPassword,
+    );
 
     const permission = await this.prismaService.permissions.findFirst({
       where: { name: 'products_get' },
@@ -105,6 +111,29 @@ export class AuthService {
       createdUser.permissions,
     );
     await this.updateRefreshToken(createdUser.id, tokens.refreshToken);
+
+    if (!createUserDto.password) {
+      await this.nodemailerService.sendEmail({
+        to: createUserDto.email,
+        subject: 'Sua senha',
+        mensagem: {
+          name: createUserDto.name,
+          client_password: randomPassword,
+          client_email: createUserDto.email,
+        },
+        template: 'welcome',
+      });
+    } else {
+      await this.nodemailerService.sendEmail({
+        to: createUserDto.email,
+        subject: 'Bem vindo ao webspy',
+        mensagem: {
+          nome: createUserDto.name,
+          email: createUserDto.email,
+        },
+        template: 'index',
+      });
+    }
 
     return tokens;
   }

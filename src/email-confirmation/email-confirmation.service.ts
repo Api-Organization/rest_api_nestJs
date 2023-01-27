@@ -30,6 +30,7 @@ export class EmailConfirmationService {
       to: 'suporte@adheart.com.br',
       subject: 'Email confirmation',
       mensagem: text,
+      template: '/index',
     });
   }
 

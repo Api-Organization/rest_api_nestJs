@@ -6,12 +6,13 @@ import { SendEmailDto } from './dto/send-email.dto';
 export class NodemailerService {
   constructor(private mailerService: MailerService) {}
 
-  async sendEmail({ to, subject, mensagem }: SendEmailDto) {
+  async sendEmail({ to, subject, mensagem, template }: SendEmailDto) {
     const response = await this.mailerService.sendMail({
       to,
       from: '',
       subject,
-      html: `<h3 style="color: red">${mensagem}</h3>`,
+      template: template,
+      context: { ...mensagem },
     });
 
     return true;
