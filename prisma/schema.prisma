@@ -109,6 +109,7 @@ model Users {
   isEmailConfirmed   Boolean?
   email              String        @unique
   password           String
+  plataform          String?
   permissions        Permissions[]
   refresh_Token      String?
   created_at         DateTime?     @default(now())

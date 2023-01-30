@@ -594,6 +594,28 @@ async function main() {
       },
     },
   });
+  const user2 = await prisma.users.create({
+    data: {
+      name: 'funcionaria',
+      email: 'laradllany.lp@gmail.com',
+      number: 'Não informado',
+      password: await argon2.hash('lara123789'),
+      Address: {
+        create: {
+          city: 'Brasília',
+          state: 'DF',
+          country: 'Brasil',
+          postal_code: '70686055',
+          line1: 'Rua teste 30',
+        },
+      },
+      permissions: {
+        connect: {
+          id: permission.id,
+        },
+      },
+    },
+  });
 
   const allPermissions = await prisma.permissions.findMany();
 
