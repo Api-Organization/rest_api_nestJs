@@ -100,6 +100,7 @@ Table Users {
   isEmailConfirmed Boolean
   email String [unique, not null]
   password String [not null]
+  plataform String
   permissions Permissions [not null]
   refresh_Token String
   created_at DateTime [default: `now()`]
