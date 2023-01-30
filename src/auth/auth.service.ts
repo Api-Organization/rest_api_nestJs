@@ -93,7 +93,7 @@ export class AuthService {
     );
 
     const permission = await this.prismaService.permissions.findFirst({
-      where: { name: 'products_get' },
+      where: { name: 'get_products' },
     });
 
     const createdUser = await this.usersService.create({

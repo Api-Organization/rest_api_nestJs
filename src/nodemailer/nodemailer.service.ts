@@ -9,12 +9,12 @@ export class NodemailerService {
   async sendEmail({ to, subject, mensagem, template }: SendEmailDto) {
     const response = await this.mailerService.sendMail({
       to,
-      from: '',
+      from: 'suporte@adheart.com.br',
       subject,
       template: template,
       context: { ...mensagem },
     });
 
-    return true;
+    return response;
   }
 }
