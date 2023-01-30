@@ -14,7 +14,7 @@
     "start:prod": "node dist/src/main",
     "start:database": "npx prisma migrate dev && npm run seed",
     "seed": "npx ts-node prisma/seed.ts",
-    "deploy": "npm install && npm run build && npm run start:prod",
+    "deploy": "npm install --force && npm run build && npm run start:prod",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
