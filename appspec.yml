@@ -1,7 +1,7 @@
 # Do not change this file. 
 # This is an AWS Code Deploy appspec.yml file
 
-version: 0.0
+version: 0.2
 os: linux
 
 files:
