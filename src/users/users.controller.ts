@@ -15,6 +15,7 @@ import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
 import { Request } from 'express';
 import { EmailConfirmationService } from '@/email-confirmation/email-confirmation.service';
 import { CreateAddressDTO } from './dto/create-address.dto';
+import { PermissionGuard } from '@/common/guards/permission.guard';
 
 @Controller('users')
 export class UsersController {
@@ -38,7 +39,7 @@ export class UsersController {
     return this.usersService.createAddress(userId, createAddressDto);
   }
 
-  // @UseGuards(AccessTokenGuard, PermissionGuard(['products_get', 'adheart_get']))
+  @UseGuards(AccessTokenGuard, PermissionGuard(['get_users']))
   @UseGuards(AccessTokenGuard)
   @Get()
   async findAll() {

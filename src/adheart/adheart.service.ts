@@ -13,6 +13,7 @@ export class AdheartService {
     const params = new URLSearchParams(query).toString();
     const url = `https://adheart.me/teasers?${params}`;
 
+
     const response = await this.httpService.axiosRef({
       baseURL: url,
       method: 'GET',
@@ -32,18 +33,18 @@ export class AdheartService {
           img: value.querySelector('img')?.attributes?.src,
           title: value
             .querySelector('h4 > a')
-            ?.innerText.replace(/\n/g, '')
+            ?.innerText?.replace(/\n/g, '')
             .replace(/( )+/g, ' '),
           titleLink: value.querySelector(
             '.media-body > h4 > a[target*="blank"]',
           )?.attributes?.href,
           date: value
             .querySelector('.media-body > p')
-            ?.innerText.replace(/\n/g, '')
-            .replace(/( )+/g, ' '),
+            ?.innerText?.replace(/\n/g, '')
+            ?.replace(/( )+/g, ' '),
           plataforms: value
             .querySelectorAll('.platforms > img[src*="/tpl/platforms/"]')
-            .map((item) => `https://adheart.me${item.attributes.src}`),
+            .map((item) => `https://adheart.me${item?.attributes?.src}`),
         },
         btnGroup: {
           allTeasers: `https://adheart.me${
@@ -55,7 +56,7 @@ export class AdheartService {
           }`,
           firstCopy: value
             .querySelector('div.btn-group > button')
-            .innerHTML.replace(/\n/g, '')
+            ?.innerHTML?.replace(/\n/g, '')
             .replace(/( )+/g, ' '),
         },
         carousel: {
@@ -63,31 +64,31 @@ export class AdheartService {
             value.querySelectorAll('.carousel-item > img')?.length === 0
               ? value.querySelector('.carousel-item > video')?.attributes?.src
               : Array.from(value.querySelectorAll('.carousel-item > img'))?.map(
-                  (item) => item.attributes.src,
+                  (item) => item?.attributes.src,
                 ),
         },
         cardInformation: {
           title: value
             .querySelector('.teaser_text_title')
-            ?.innerHTML.replace(/\n/g, '')
-            .replace(/( )+/g, ' '),
+            ?.innerHTML?.replace(/\n/g, '')
+            ?.replace(/( )+/g, ' '),
           description: value
             .querySelector('.teaser_text_link_description')
-            ?.innerHTML.replace(/\n/g, '')
-            .replace(/( )+/g, ' '),
+            ?.innerHTML?.replace(/\n/g, '')
+            ?.replace(/( )+/g, ' '),
         },
         cardButton: value
           .querySelector('.card-body > span.kt-font-primary')
           ?.innerText.replace(/\n/g, ''),
         cardFooter: {
           findLinks: value.querySelector('a[href*="/teasers/?in"]')?.attributes
-            .href,
+            ?.href,
           findIp: value.querySelector('a[href*="/teasers/?ip"]')?.attributes
-            .href,
+            ?.href,
           inputLink:
-            value.querySelector('input.form-control')?.attributes.value,
+            value.querySelector('input.form-control')?.attributes?.value,
           goToLink: value.querySelector('.input-group > div:nth-child(5) > a')
-            ?.attributes.href,
+            ?.attributes?.href,
         },
       }),
     );
@@ -95,14 +96,14 @@ export class AdheartService {
     const pagination = {
       text: page
         .querySelector('#pagination_top > .col-lg-8 > span:nth-child(1)')
-        .innerText.replace(/\n/g, '')
-        .replace(/( )+/g, ' ')
-        .replace('"', '')
-        .replace(',', ''),
+        ?.innerText.replace(/\n/g, '')
+        ?.replace(/( )+/g, ' ')
+        ?.replace('"', '')
+        ?.replace(',', ''),
       total: page
         .querySelector('#pagination_top > .col-lg-8 > a:nth-child(6)')
-        .innerText.replace(/\n/g, '')
-        .replace(/( )+/g, ' '),
+        ?.innerText.replace(/\n/g, '')
+        ?.replace(/( )+/g, ' '),
     };
 
     return {

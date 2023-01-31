@@ -258,6 +258,9 @@ async function main() {
       {
         name: 'get_faq',
       },
+      {
+        name: 'get_users',
+      },
     ],
   });
 
