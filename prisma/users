@@ -1,0 +1,619 @@
+[
+  {
+    name: 'Joao Vitor Guimaraes da Silva',
+    email: 'joaovictorcb8@gmail.com',
+    number: '19 99113-1788',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Emerson Luan Hack',
+    email: 'emersonluha@gmail.com',
+    number: '46 9917-6658',
+    password: await argon2.hash('emersonluha'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Allan Martins Rosa',
+    email: 'allanmartinsrosa@gmail.com',
+    number: '11 97749-0390',
+    password: await argon2.hash('allanmartinsrosa'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Marileide Priscila da Silva',
+    email: 'mariemarcos1608@gmail.com',
+    number: '31 9237-6421',
+    password: await argon2.hash('mariemarcos1608'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Jos� Elson Bispo',
+    email: 'ghdiscordpigs@gmail.com',
+    number: '38 9731-1137',
+    password: await argon2.hash('ghdiscordpigs'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Lucas Dias',
+    email: 'lucascdias20000@gmail.com',
+    number: '33 9140-5663',
+    password: await argon2.hash('lucascdias20000'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Andrei junior xavier da silva',
+    email: 'Thegoatdigital01@gmail.com',
+    number: '51 9009-5114',
+    password: await argon2.hash('Thegoatdigital01'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Diemis Ricardo de Lima',
+    email: 'diemisrl@gmail.com',
+    number: '41 8767-4601',
+    password: await argon2.hash('diemisrl'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Allan de Oliveira Teixeira',
+    email: 'allanteixeira06@hotmail.com',
+    number: '351 916 126 687',
+    password: await argon2.hash('allanteixeira06'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Jocil� pereira dias junior',
+    email: 'eduardoaugusto358@gmail.com',
+    number: '89 8134-0810',
+    password: await argon2.hash('eduardoaugusto358'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Paulo Henrique Souza',
+    email: 'pauloalvesadm@gmail.com',
+    number: '61 8446-8127',
+    password: await argon2.hash('pauloalvesadm'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Leandro Pinheiro de Faria',
+    email: 'leocsb@yahoo.com.br',
+    number: '31 7128-0413',
+    password: await argon2.hash('leocsb'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Warley Rodrigues de Oliveira',
+    email: 'warleyro@gmail.com',
+    number: '62 9919-5280',
+    password: await argon2.hash('warleyro'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Andr� Bruno',
+    email: 'andre_bruno@hajatec.com.br',
+    number: '21 99188-1642',
+    password: await argon2.hash('andre_bruno'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Mayton Machado',
+    email: 'rkcompany.ti@gmail.com',
+    number: '34 9211-8062',
+    password: await argon2.hash('rkcompany'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Gustavo Tarso de Castro',
+    email: 'sevenbrasil77@gmail.com',
+    number: '48 9697-3658',
+    password: await argon2.hash('sevenbrasil77'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Hallyson santos',
+    email: 'Hallysonsevenx@gmail.com',
+    number: '82 9951-8305',
+    password: await argon2.hash('Hallysonsevenx'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Fernando de Araujo Silva',
+    email: 'araujofernando88@hotmail.com',
+    number: '11 94891-8771',
+    password: await argon2.hash('araujofernando88'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'M�rcio Santos',
+    email: 'marcinhoredskull@gmail.com',
+    number: '61 9580-9597',
+    password: await argon2.hash('marcinhoredskull'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Bernardo da silva lenarduzzi',
+    email: 'Lenarduzzi.imports@gmail.com',
+    number: '17 99762-3726',
+    password: await argon2.hash('Lenarduzzi'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Paulo Rafael Profes',
+    email: 'Paulorafaelprofes@gmail.com',
+    number: '51 9448-3250',
+    password: await argon2.hash('Paulorafaelprofes'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Laise Silva de Oliveira',
+    email: 'laisepay@gmail.com',
+    number: '27 99748-0077',
+    password: await argon2.hash('laisepay'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Pedro Paulo Gundim de Freitas',
+    email: 'ppgundim@gmail.com',
+    number: '62 8165-1107',
+    password: await argon2.hash('ppgundim'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'Andrea Fagundes Domingos',
+    email: 'Riquezagora@gmail.com',
+    number: '11 94384-3817',
+    password: await argon2.hash('riquezagora'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Marcus Alves',
+    email: 'contato@spacegiftbrasil.com',
+    number: '19 98169-7014',
+    password: await argon2.hash('spacegiftbrasil'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'Mateus Caetano',
+    email: 'mtscaetano@outlook.com',
+    number: '14 99762-2236',
+    password: await argon2.hash('mtscaetano'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Eduardo Felipe',
+    email: 'eduardo_siewert@hotmail.com',
+    number: '47 9951-3825',
+    password: await argon2.hash('eduardo_siewert'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Isa�as Echer',
+    email: 'isaias.echer@hotmail.com',
+    number: '61 401 907 915',
+    password: await argon2.hash('isaias.echer'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Geovana Dyuri Murata',
+    email: 'contato@geovanamurata.com',
+    number: '81 90-6335-3905',
+    password: await argon2.hash('geovanamurata'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'Wandeson da Silva',
+    email: 'wandesoncti@gmail.com',
+    number: '63 9135-1297',
+    password: await argon2.hash('wandesoncti'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Carlos felipe',
+    email: 'carlosfelipesm98@gmail.com',
+    number: '62 8149-6421',
+    password: await argon2.hash('carlosfelipesm98'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Marcio Ramo',
+    email: 'marcioramo@hotmail.com.br',
+    number: '19 98183-6884',
+    password: await argon2.hash('marcioramo'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Marcelo da Palma Oliveira',
+    email: 'marcelo.poliveirajr@gmail.com',
+    number: '71 9148-4020',
+    password: await argon2.hash('poliveirajr'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'Mateus Henrique Marques',
+    email: 'Mateus.henrique.marques@hotmail.com',
+    number: '48 9810-0214',
+    password: await argon2.hash('Mateus.henrique'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Jo�o V�ctor Avelar',
+    email: 'joaoavelar1990@hotmail.com',
+    number: '62 8480-2063',
+    password: await argon2.hash('joaoavelar1990'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Thiago dos Santos',
+    email: 'davizinho2828@gmail.com',
+    number: '67 9697-4051',
+    password: await argon2.hash('davizinho2828'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Rog�rio dos Santos Machado',
+    email: 'soniarsedrez@hotmail.com',
+    number: '48 9981-9946',
+    password: await argon2.hash('soniarsedrez'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'Guilherme da Silva de Souza',
+    email: 'Guilhermeshid@gmail.com',
+    number: '41 8789-9827',
+    password: await argon2.hash('Guilhermeshid'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Felipe Fernandes dos Reis',
+    email: 'lipefernds1@gmail.com',
+    number: '11 97689-9887',
+    password: await argon2.hash('lipefernds1'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Guilherme Minucci',
+    email: 'guih-m@outlook.com',
+    number: '19 99554-0177',
+    password: await argon2.hash('guih-m'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Victor Monteiro',
+    email: 'victoralves.monteiro@outlook.com',
+    number: '21 97282-1118',
+    password: await argon2.hash('victoralves'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Alice Lima Farias',
+    email: 'deboraalves-c08@hotmail.com',
+    number: '21 98618-5411',
+    password: await argon2.hash('deboraalves'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Eduardo Demartini Jord�o',
+    email: 'eduardodemartinij@gmail.com',
+    number: '28 99900-3841',
+    password: await argon2.hash('eduardodemartinij'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Victor Hugo Belini',
+    email: '',
+    number: '16 99629-3283',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'J�lison Guilherme',
+    email: 'julisongui@gmail.com',
+    number: '93 9175-3370',
+    password: await argon2.hash('julisongui'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'Cleber Rodrigues',
+    email: 'suzyrodriguesmg@gmail.com',
+    number: '37 9122-9877',
+    password: await argon2.hash('suzyrodriguesmg'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Bryan Cesar Trovisco',
+    email: 'bryancesarfull7@gmail.com',
+    number: '21 98297-4029',
+    password: await argon2.hash('bryancesarfull7'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Bruno Silveira',
+    email: 'bruninhopho@gmail.com',
+    number: '54 9674-1342',
+    password: await argon2.hash('bruninhopho'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Leonardo Figueir� Onnis',
+    email: 'leoonnis@gmail.com',
+    number: '33 9912-9410',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Lu� JOBIM GUEDES',
+    email: 'lj.jobim@gmail.com',
+    number: '85 9215-6658',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Marcelo Santana',
+    email: 'celossantana@gmail.com',
+    number: '51 9235-7120',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Igor Costa Barata',
+    email: 'igor.costa.b.17@gmail.com',
+    number: '47 9227-5080',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Johnathan Martins',
+    email: 'jw@efeito.digital',
+    number: '61 8231-5176',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: "['get_adheart','get_adserea', 'get_adspy' ]",
+  },
+  {
+    name: 'Silvio de souza santos',
+    email: 'Sillll75@gmail.com',
+    number: '34 9237-9239',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Francielly Oliveira Diehl',
+    email: 'franodiehl@gmail.com',
+    number: '48 9153-3128',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Anderson Lima',
+    email: 'anderson.1337.lima@gmail.com',
+    number: '11 96958-1533',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Rodrigo Benfica',
+    email: 'rodrigo-benfica@hotmail.com',
+    number: '34 9935-8280',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Anderson Praxedes',
+    email: 'contato@epxdigitalbusiness.com',
+    number: '11 93462-2724',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+  {
+    name: 'Paloma Franciele',
+    email: 'palomaarces@outlook.com',
+    number: '51 9250-7794',
+    password: await argon2.hash('joaovictorcb8'),
+    permissions: {
+      connect: {
+        id: 'get_adheart',
+      },
+    },
+  },
+];

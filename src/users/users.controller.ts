@@ -63,12 +63,9 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
-  // @UseGuards(AccessTokenGuard)
-  // @Delete(':id')
-  // async remove(@Param('id') id: string, @Req() req: Request) {
-  //   const userId = req.user['sub'];
-  //   console.log(await this.usersService.isAdmin(userId));
-  //   return true;
-  //   return this.usersService.remove(id);
-  // }
+  @UseGuards(AccessTokenGuard)
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.usersService.remove(id);
+  }
 }
