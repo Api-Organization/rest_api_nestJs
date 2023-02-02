@@ -9,11 +9,9 @@ export class CreateNoteDto {
   @IsString()
   content: string;
 
-  @IsNotEmpty()
   @IsString()
   time: string;
 
-  @IsNotEmpty()
   @IsString()
   user_id: string;
 }
