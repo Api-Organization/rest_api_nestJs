@@ -10,8 +10,8 @@ export class CreateNoteDto {
   content: string;
 
   @IsString()
-  time: string;
+  time?: string;
 
   @IsString()
-  user_id: string;
+  user_id?: string;
 }
