@@ -27,7 +27,6 @@ model Notes {
   user_id    String?
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
-  users      Users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   links      Links[]
 }
 
@@ -114,7 +113,6 @@ model Users {
   refresh_Token      String?
   created_at         DateTime?     @default(now())
   updated_at         DateTime?     @default(now())
-  notes              Notes[]
   Payments           Payments[]
   Discount           Discount[]
   Address            Address[]

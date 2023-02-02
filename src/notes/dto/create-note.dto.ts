@@ -11,7 +11,4 @@ export class CreateNoteDto {
 
   @IsString()
   time?: string;
-
-  @IsString()
-  user_id?: string;
 }

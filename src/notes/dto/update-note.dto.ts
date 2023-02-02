@@ -13,7 +13,4 @@ export class UpdateNoteDto extends PartialType(CreateNoteDto) {
 
   @IsString()
   time?: string;
-
-  @IsString()
-  user_id?: string;
 }
