@@ -47,10 +47,10 @@ export class AdheartService {
             .map((item) => `https://adheart.me${item?.attributes?.src}`),
         },
         btnGroup: {
-          allTeasers: `https://adheart.me${
+          allTeasers: `${
             value.querySelector('div.btn-group > a')?.attributes?.href
           }`,
-          similarTeasers: `https://adheart.me${
+          similarTeasers: `${
             value.querySelector('a[href*="/teasers/?identical_to"]')?.attributes
               ?.href
           }`,
