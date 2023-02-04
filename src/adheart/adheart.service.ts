@@ -13,7 +13,6 @@ export class AdheartService {
     const params = new URLSearchParams(query).toString();
     const url = `https://adheart.me/teasers?${params}`;
 
-
     const response = await this.httpService.axiosRef({
       baseURL: url,
       method: 'GET',
@@ -101,8 +100,11 @@ export class AdheartService {
         ?.replace('"', '')
         ?.replace(',', ''),
       total: page
-        .querySelector('#pagination_top > .col-lg-8 > a:nth-child(6)')
-        ?.innerText.replace(/\n/g, '')
+        .querySelectorAll('#pagination_top > .col-lg-8 > a[href*="#"]')
+        [
+          page.querySelectorAll('#pagination_top > .col-lg-8 > a[href*="#"]')
+            .length - 1
+        ]?.innerText.replace(/\n/g, '')
         ?.replace(/( )+/g, ' '),
     };
 
