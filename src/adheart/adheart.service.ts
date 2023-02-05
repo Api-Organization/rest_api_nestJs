@@ -109,11 +109,12 @@ export class AdheartService {
     };
 
     const error = {
-      errorUp: page.querySelector('div.alert.alert-solid.alert-danger')
-        ?.innerText,
-      errorDown: page.querySelector(
-        'div.alert.alert-solid.alert-outline-danger',
-      )?.innerText,
+      errorUp: page
+        .querySelector('div.alert.alert-solid.alert-danger')
+        ?.innerText?.replace(/\n/g, ''),
+      errorDown: page
+        .querySelector('div.alert.alert-solid.alert-outline-danger')
+        ?.innerText?.replace(/\n/g, ''),
     };
 
     return {
