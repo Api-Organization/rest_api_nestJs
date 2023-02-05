@@ -111,10 +111,13 @@ export class AdheartService {
     const error = {
       errorUp: page
         .querySelector('div.alert.alert-solid.alert-danger')
-        ?.innerText?.replace(/\t/g, ''),
+        ?.innerText?.replace(/\t/g, '')
+        ?.replace(/\n/g, ''),
       errorDown: page
         .querySelector('div.alert.alert-solid.alert-outline-danger')
-        ?.innerText?.replace(/\t/g, ''),
+        ?.innerText?.replace(/\t/g, '')
+        ?.replace(/\n/g, '')
+        ?.replace(`///`, ''),
     };
 
     return {
