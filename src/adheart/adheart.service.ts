@@ -108,9 +108,18 @@ export class AdheartService {
         ?.replace(/( )+/g, ' '),
     };
 
+    const error = {
+      errorUp: page.querySelector('div.alert.alert-solid.alert-danger')
+        ?.innerText,
+      errorDown: page.querySelector(
+        'div.alert.alert-solid.alert-outline-danger',
+      )?.innerText,
+    };
+
     return {
       pagination,
       cards,
+      error,
     };
   }
 }
