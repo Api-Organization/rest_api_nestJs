@@ -93,6 +93,11 @@ export class UsersService {
           name: updateUserDto.name,
           email: updateUserDto.email,
           number: updateUserDto.number,
+          permissions: {
+            connect: {
+              id: updateUserDto.permission_id,
+            },
+          },
         },
       })
       .then((user) => {

@@ -27,4 +27,8 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsNotEmpty()
   @MinLength(2)
   name?: string;
+
+  @IsOptional()
+  @IsString()
+  permission_id?: string;
 }
