@@ -27,7 +27,7 @@ export class AdheartService {
 
     const cards = Array.from(
       page.querySelectorAll('div.card-blog'),
-      (value) => ({
+      (value, index) => ({
         cardHeader: {
           img: value.querySelector('img')?.attributes?.src,
           title: value
@@ -70,11 +70,22 @@ export class AdheartService {
           title: value
             .querySelector('.teaser_text_title')
             ?.innerHTML?.replace(/\n/g, '')
+            ?.replace(/( )+/g, ' ')
+            .replace(/(<([^>]+)>)/gi, ''),
+          descriptionUp: value
+            ?.querySelector('p.teaser_text_html')
+            ?.innerText?.replace(/\n/g, '')
             ?.replace(/( )+/g, ' '),
           description: value
             .querySelector('.teaser_text_link_description')
             ?.innerHTML?.replace(/\n/g, '')
             ?.replace(/( )+/g, ' '),
+        },
+        cardSettings: {
+          download: page?.querySelector(
+            'div.card-img-overlay > div.btn-group > a[href*="/d/"]',
+          )?.attributes?.href,
+          openImg: `${index}`,
         },
         cardButton: value
           .querySelector('.card-body > span.kt-font-primary')
