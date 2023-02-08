@@ -15,6 +15,7 @@ import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
 import { Request } from 'express';
 import { EmailConfirmationService } from '@/email-confirmation/email-confirmation.service';
 import { CreateAddressDTO } from './dto/create-address.dto';
+import { UpdateUserPermissionDto } from './dto/Update-user-permission.dto';
 import { PermissionGuard } from '@/common/guards/permission.guard';
 
 @Controller('users')
@@ -27,6 +28,14 @@ export class UsersController {
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @Post('permissions/:id')
+  async removePermissions(
+    @Param('id') id: string,
+    @Body() UpdateUserPermissionDto: UpdateUserPermissionDto,
+  ) {
+    return this.usersService.removePermission(id, UpdateUserPermissionDto);
   }
 
   @UseGuards(AccessTokenGuard)

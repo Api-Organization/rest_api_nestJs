@@ -2,6 +2,7 @@ import { NodemailerService } from '@/nodemailer/nodemailer.service';
 import { PrismaService } from '@/prisma/prisma.service';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateAddressDTO } from './dto/create-address.dto';
+import { UpdateUserPermissionDto } from './dto/Update-user-permission.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -123,6 +124,20 @@ export class UsersService {
     return this.prismaService.users.update({
       where: { email },
       data: { isEmailConfirmed: true },
+    });
+  }
+
+  async removePermission(
+    id: string,
+    UpdateUserPermissionDto: UpdateUserPermissionDto,
+  ) {
+    return this.prismaService.users.update({
+      where: { id },
+      data: {
+        permissions: {
+          disconnect: { id: UpdateUserPermissionDto.permission_id },
+        },
+      },
     });
   }
 }
