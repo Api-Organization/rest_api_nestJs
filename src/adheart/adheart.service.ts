@@ -9,9 +9,9 @@ export class AdheartService {
     private readonly httpService: HttpService,
   ) {}
 
-  async getPage(query: { [key: string]: string }) {
-    const params = new URLSearchParams(query).toString();
-    const url = `https://adheart.me/teasers?${params}`;
+  async getPage(query: string) {
+    console.log(query);
+    const url = `https://adheart.me/teasers?${query}`;
 
     const response = await this.httpService.axiosRef({
       baseURL: url,
@@ -80,6 +80,14 @@ export class AdheartService {
             .querySelector('.teaser_text_link_description')
             ?.innerHTML?.replace(/\n/g, '')
             ?.replace(/( )+/g, ' '),
+          geos:
+            value.querySelectorAll('.card-body > img[src*="/tpl/flags"]')
+              ?.length === 0
+              ? value.querySelector('.card-body > img[src*="/tpl/flags"]')
+                  ?.attributes?.src
+              : Array.from(
+                  value.querySelectorAll('.card-body > img[src*="/tpl/flags"]'),
+                )?.map((item) => item?.attributes.src),
         },
         cardSettings: {
           download: page?.querySelector(
@@ -102,6 +110,10 @@ export class AdheartService {
         },
       }),
     );
+
+    const geos = Array.from(
+      page.querySelectorAll('img[src*="/tpl/flags"]'),
+    )?.map((item) => item?.attributes.src);
 
     const pagination = {
       text: page
