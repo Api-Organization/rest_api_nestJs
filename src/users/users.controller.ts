@@ -60,9 +60,23 @@ export class UsersController {
   async findOne(@Req() req: Request) {
     const userId = req.user['sub'];
     const user = await this.usersService.findOne(userId);
+
     // const email = await this.emailConfirmationService.sendVerificationLink(
     //   user.email,
     // );
+
+    return { user };
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get(':id')
+  async findOneUser(@Param('id') id: string) {
+    const user = await this.usersService.findOne(id);
+
+    // const email = await this.emailConfirmationService.sendVerificationLink(
+    //   user.email,
+    // );
+
     return { user };
   }
 
