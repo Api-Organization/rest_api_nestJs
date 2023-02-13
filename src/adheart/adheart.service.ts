@@ -19,7 +19,7 @@ export class AdheartService {
       headers: {
         'Accept-Encoding': 'gzip,deflate,compress',
         Cookie:
-          'token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzYzMDgyNjYsImV4cCI6MTY4NDA4NDI2Niwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiMjE0NzMyIn0.pMM71SwZIrfNvVCmF7pAVK6ITu2hbVnTiAHxhyZ0vwLh6q6FTPe9iOrXGsb_JJOhJp6xSreWAfrA5zfliHOXiGlFf8vUgpI49pe4s0GEyF5jiTZgHXtr1GWNBDkZkg7TONUzm3DYtuw2SDcOGwrplmr6B6apaD2ZsH-ZPpNnFFVvVojaytMzoxsGrHMRYFa1LI0WaRpJ-_NKTgD17hPcbHs_LS4avbdCH2Od2FhCgxDLMtilo1_4kgPfITY9qJ6WcuHbiVlarUevu19IKiDC04algzU10c9jXSrNMEZn7Tk-dk_zhkcLwCqL46Zo_FAK0Fzvls2wFWYcfWVC5ZTZ0A; hash=bEIl9WJkZUhS7wICIJ1mSR5sTNWgbaOV; reflink=GAOHEXy; _aid=9c2376dd803c13a01c8a364551c43b58; PHPSESSID=0bdf777cc13f691deca8c8d1a2995bb4',
+          'PHPSESSID=6d4ee5f9243daba4f96dff520481bce1; _language=ru; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzYzMDg5MzIsImV4cCI6MTY4NDA4NDkzMiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiMjE0NzMyIn0.ceg3BGLUcC1xO0RmSy6nSFCCm-6zaeBqgpPlU-puFv6dt-wD1m3IyXDWi5j5KZwmbUc6AoZZVIPnxMp7A4hqiAKpY5AMfJ_l1Q8aBlOaPokZvpKBl4-GfvMxcv6yg8bHTcl6AqYcAm8ORQ4Avfeadbewi69SC1HcsF_NlghajgnBBjrVx2mIqXE_jQQc5z9g9AJbpGsnb_7ZrbSut7CoWNntTmmSBKMdIQKiDDG8-7IYDBzQJcv-igN0wqQkOkswkNOiGFD0V4e1rbphTaqHyk_8fciMMO3lh2IQE6l-4NI3LY3nfhcfsLgw9MHfNKBKuC_lOYklSo6BUtdl1ZoBPA; hash=bEIl9WJkZUhS7wICIJ1mSR5sTNWgbaOV; PHPSESSID=39f0dfe076692086622beb329cb5351c',
       },
     });
 
