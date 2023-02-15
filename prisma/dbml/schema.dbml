@@ -234,12 +234,12 @@ Enum method {
 
 Ref: Links.note_id > Notes.id [delete: Cascade]
 
-Ref: Subscription.userId > Users.id
+Ref: Subscription.userId > Users.id [delete: Cascade]
 
-Ref: Address.userId > Users.id
+Ref: Address.userId > Users.id [delete: Cascade]
 
-Ref: Payments.userId > Users.id
+Ref: Payments.userId > Users.id [delete: Cascade]
 
-Ref: Payments.productId > Products.id
+Ref: Payments.productId > Products.id [delete: Cascade]
 
-Ref: Discount.user_id > Users.id
+Ref: Discount.user_id > Users.id [delete: Cascade]

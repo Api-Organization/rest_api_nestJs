@@ -14,7 +14,7 @@ export class StripeService implements OnModuleInit {
 
   async onModuleInit() {
     this.stripe = new Stripe(
-      'sk_test_51MS5GSELi39C3IeKRBDZKgHWd0CmndNiOLxnebKI6GzJTNTE2Gn9VeYJrcD4Lh7kjtsghLNjRff45LKCs2sDfk1z00slt6ByzP',
+      'sk_test_51MCE8XIrC6uJHsGlAy6lLaY94zKpjtIDFfP14zuZGaBk86D4aU0cKRgssWmuM104PHD20nNTJdQjqVipy4PdVpBg00ccXN7rty',
       {
         apiVersion: '2022-11-15',
       },

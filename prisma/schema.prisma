@@ -54,7 +54,7 @@ model Reviewers {
   description String?
   created_at  DateTime?  @default(now())
   updated_at  DateTime?  @default(now())
-  Files      Files[]
+  Files       Files[]
   Products    Products[]
 }
 
@@ -67,7 +67,7 @@ model Accounts {
   created_at  DateTime?     @default(now())
   updated_at  DateTime?     @default(now())
   permissions Permissions[]
-} 
+}
 
 model Permissions {
   id          String     @id @default(uuid())
@@ -93,34 +93,35 @@ model Products {
   updated_at  DateTime?     @default(now())
   Permissions Permissions[]
   Faq         Faq[]
-  Files      Files[]
+  Files       Files[]
   Reviewers   Reviewers[]
   Payments    Payments[]
 }
 
 model Users {
-  id                 String        @id @default(uuid())
+  id                 String         @id @default(uuid())
   stripe_customer_id String?
   name               String
   number             String?
   status             String?
   role               String?
   isEmailConfirmed   Boolean?
-  email              String        @unique
+  email              String         @unique
   password           String
   plataform          String?
-  permissions        Permissions[]
+  permissions        Permissions[] 
   refresh_Token      String?
-  created_at         DateTime?     @default(now())
-  updated_at         DateTime?     @default(now())
-  Payments           Payments[]
-  Discount           Discount[]
-  Address            Address[]
-  Subscription       Subscription[]
+  created_at         DateTime?      @default(now())
+  updated_at         DateTime?      @default(now())
+  Payments           Payments[] 
+  Discount           Discount[] 
+  Address            Address[] 
+  Subscription       Subscription[] 
+
 }
 
 model Subscription {
-  id                     String   @id @default(uuid())
+  id                     String    @id @default(uuid())
   userId                 String
   stripe_subscription_id String
   status                 String?
@@ -133,7 +134,7 @@ model Subscription {
   ended_at               DateTime?
   default_payment_method String?
   metadata               String?
-  Users                  Users    @relation(fields: [userId], references: [id])
+  Users                  Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Address {
@@ -146,7 +147,7 @@ model Address {
   line1              String
   metadata           String?
   userId             String
-  Users              Users   @relation(fields: [userId], references: [id])
+  Users              Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum method {
@@ -163,10 +164,10 @@ model Payments {
   status     String
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
-  Users      Users     @relation(fields: [userId], references: [id])
+  Users      Users     @relation(fields: [userId], references: [id],  onDelete: Cascade)
   userId     String
   productId  String
-  products   Products  @relation(fields: [productId], references: [id])
+  products   Products  @relation(fields: [productId], references: [id],  onDelete: Cascade)
 }
 
 model Price {
@@ -199,7 +200,7 @@ model Discount {
   stripe_discount_id String
   subscription_id    String
   user_id            String
-  user               Users    @relation(fields: [user_id], references: [id])
+  user               Users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
   start              DateTime
   end                DateTime
   promo_code         String

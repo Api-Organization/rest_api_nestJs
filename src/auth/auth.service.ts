@@ -159,7 +159,11 @@ export class AuthService {
       throw new BadRequestException('Password is incorrect');
     }
 
-    const tokens = await this.getTokens(user.id, user.permissions);
+    const permissionsClean: any = user.permissions.map((permission) => {
+      return { name: permission.name, id: permission.id };
+    });
+
+    const tokens = await this.getTokens(user.id, permissionsClean);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
 
     return tokens;

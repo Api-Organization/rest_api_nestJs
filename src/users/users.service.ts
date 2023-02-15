@@ -76,14 +76,22 @@ export class UsersService {
       });
   }
 
-  async findAll() {
-    return await this.prismaService.users.findMany().then((users) =>
-      users.map((user) => {
-        delete user.password;
+  async findAll(skip: number, take: number) {
+    const [users, total] = await this.prismaService.$transaction([
+      this.prismaService.users.findMany({ skip, take }),
+      this.prismaService.users.count(),
+    ]);
 
-        return user;
-      }),
-    );
+    const totalPage = Math.ceil(total / take);
+
+    const usersWithoutPassword = users.map((user) => {
+      delete user.password;
+      delete user.refresh_Token;
+
+      return user;
+    });
+
+    return { total, totalPage, users: usersWithoutPassword };
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
@@ -108,16 +116,23 @@ export class UsersService {
       });
   }
 
-  remove(id: string) {
+  async remove(id: string) {
     return this.prismaService.users.delete({
       where: { id },
     });
   }
 
   async getByEmail(email: string) {
-    return this.prismaService.users.findUnique({
-      where: { email },
-    });
+    return this.prismaService.users
+      .findUnique({
+        where: { email },
+      })
+      .then((user) => {
+        delete user.password;
+        delete user.refresh_Token;
+
+        return user;
+      });
   }
 
   async markEmailAsConfirmed(email: string) {

@@ -10,7 +10,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Req, UseGuards } from '@nestjs/common/decorators';
+import { Query, Req, UseGuards } from '@nestjs/common/decorators';
 import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
 import { Request } from 'express';
 import { EmailConfirmationService } from '@/email-confirmation/email-confirmation.service';
@@ -51,8 +51,10 @@ export class UsersController {
   @UseGuards(AccessTokenGuard, PermissionGuard(['get_users']))
   @UseGuards(AccessTokenGuard)
   @Get()
-  async findAll() {
-    return this.usersService.findAll();
+  async findAll(@Query() query: any) {
+    const skip = query.skip ? Number(query.skip) : 0;
+    const take = query.take ? Number(query.take) : 40;
+    return this.usersService.findAll(skip, take);
   }
 
   @UseGuards(AccessTokenGuard)
@@ -67,6 +69,13 @@ export class UsersController {
 
     return { user };
   }
+  @UseGuards(AccessTokenGuard)
+  @Get('email/:email')
+  async findEmail(@Param('email') email: string) {
+    const user = await this.usersService.getByEmail(email);
+
+    return user;
+  }
 
   @UseGuards(AccessTokenGuard)
   @Get(':id')
@@ -77,7 +86,7 @@ export class UsersController {
     //   user.email,
     // );
 
-    return { user };
+    return user;
   }
 
   @UseGuards(AccessTokenGuard)
