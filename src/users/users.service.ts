@@ -227,7 +227,7 @@ export class UsersService {
 
     const forgotLink = `https://api.webspy.com.br/reset-password?token=${tokens.accessToken}`;
 
-    await this.nodemailerService.sendEmail(email);
+    // await this.nodemailerService.sendEmail(email);
 
     return tokens;
   }
