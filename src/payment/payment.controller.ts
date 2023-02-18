@@ -21,14 +21,17 @@ export class PaymentController {
     @Body('priceId') priceId: string,
   ) {
     const userId = req.user['sub'];
+
+    console.log(userId);
+
     return this.paymentService.createSubscription(userId, priceId);
   }
 
   @Post('webhook')
   async webhook(@Body() body: any) {
-    console.log(body);
 
     return this.paymentService.updateSubscription(
+      body?.data.object?.statement_descriptor,
       body.type,
       body.data.object.subscription,
     );

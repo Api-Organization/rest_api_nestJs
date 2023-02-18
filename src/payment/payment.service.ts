@@ -65,7 +65,11 @@ export class PaymentService {
     return subscription.clientSecret;
   }
 
-  async updateSubscription(type: string, subscriptionId: string) {
+  async updateSubscription(
+    productName: string,
+    type: string,
+    subscriptionId: string,
+  ) {
     const subscription = await this.prismaService.subscription.findFirst({
       where: { stripe_subscription_id: subscriptionId },
     });
@@ -85,7 +89,30 @@ export class PaymentService {
     }
 
     if (type !== 'invoice.payment_succeeded') {
+      switch (productName) {
+        case 'Adheart': {
+          const permission = await this.prismaService.permissions.findFirst({
+            where: { name: 'get_adheart' },
+          });
 
+          const subscriptionNew =
+            await this.prismaService.subscription.findFirst({
+              where: { stripe_subscription_id: subscriptionId },
+            });
+
+ 
+          await this.prismaService.users.update({
+            where: { id: subscription.userId },
+            data: {
+              permissions: {
+                connect: {
+                  id: permission.id,
+                },
+              },
+            },
+          });
+        }
+      }
 
       return await this.prismaService.subscription.update({
         where: { id: subscription.id },

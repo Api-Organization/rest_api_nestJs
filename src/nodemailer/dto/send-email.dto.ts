@@ -11,8 +11,11 @@ export class SendEmailDto {
 
   @IsString()
   @IsNotEmpty()
-  template: string;
+  template?: string;
 
   @IsNotEmpty()
-  mensagem: any;
+  mensagem?: any;
+
+  @IsString()
+  html?: string;
 }
