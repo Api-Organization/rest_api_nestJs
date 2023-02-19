@@ -37,6 +37,10 @@ export class UsersController {
   ) {
     return this.usersService.removePermission(id, UpdateUserPermissionDto);
   }
+  @Post('permissions/remove_all/:id')
+  async removeAllPermissions(@Param('id') id: string) {
+    return this.usersService.removeAllPermissions(id);
+  }
 
   @UseGuards(AccessTokenGuard)
   @Post('create-address')
@@ -74,6 +78,8 @@ export class UsersController {
   async findEmail(@Param('email') email: string) {
     const user = await this.usersService.getByEmail(email);
 
+    console.log(user, email);
+
     return user;
   }
 
@@ -99,5 +105,21 @@ export class UsersController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Patch('change-password')
+  async changePassword(@Req() req: Request, @Body() body: any) {
+    const userId = req.user['sub'];
+    const { oldPassword, newPassword } = body;
+    // return this.usersService.changePassword(userId, oldPassword, newPassword);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Patch('forgot-password')
+
+  async forgotPassword(@Body() body: any) {
+    const { email } = body;
+    // return this.usersService.forgotPassword(email);
   }
 }

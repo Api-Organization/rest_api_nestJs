@@ -5,10 +5,16 @@ import { CreateAddressDTO } from './dto/create-address.dto';
 import { UpdateUserPermissionDto } from './dto/Update-user-permission.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import * as argon2 from 'argon2';
+import { AuthService } from '@/auth/auth.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly authService: AuthService,
+    private readonly nodemailerService: NodemailerService,
+  ) {}
 
   async createAddress(userId: string, createAddress: CreateAddressDTO) {
     const address = await this.prismaService.users
@@ -155,4 +161,70 @@ export class UsersService {
       },
     });
   }
+
+  async removeAllPermissions(id: string) {
+    return this.prismaService.users.update({
+      where: { id },
+      data: {
+        permissions: {
+          set: [],
+        },
+      },
+      include: {
+        permissions: true,
+      },
+    });
+  }
+
+  // async changePassword(id: string, oldPassword: string, newPassword: string) {
+  //   const user = await this.prismaService.users.findUnique({
+  //     where: { id },
+  //     include: {
+  //       permissions: true,
+  //     },
+  //   });
+
+  //   if (!user) {
+  //     throw new BadRequestException('User does not exist');
+  //   }
+
+  //   const passwordMatches = await argon2.verify(user.password, oldPassword);
+
+  //   if (!passwordMatches) {
+  //     throw new BadRequestException('Password is incorrect');
+  //   }
+
+  //   return this.prismaService.users.update({
+  //     where: { id },
+  //     data: {
+  //       password: newPassword,
+  //     },
+  //   });
+  // }
+
+  // async forgotPassword(email: string) {
+  //   const user = await this.prismaService.users.findUnique({
+  //     where: { email },
+  //     include: {
+  //       permissions: true,
+  //     },
+  //   });
+
+  //   if (!user) {
+  //     throw new BadRequestException('User does not exist');
+  //   }
+
+  //   const permissionsClean: any = user.permissions.map((permission) => {
+  //     return { name: permission.name, id: permission.id };
+  //   });
+
+  //   const tokens = await this.authService.getTokens(user.id, permissionsClean);
+  //   await this.authService.updateRefreshToken(user.id, tokens.refreshToken);
+
+  //   const forgotLink = `https://api.webspy.com.br/reset-password?token=${tokens.accessToken}`;
+
+  //   // await this.nodemailerService.sendEmail(email);
+
+  //   return tokens;
+  // }
 }
