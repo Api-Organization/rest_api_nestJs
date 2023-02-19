@@ -23,6 +23,7 @@ model Notes {
   id         String    @id @default(uuid())
   title      String?
   content    String?
+  isUrgent   Boolean?
   time       String?
   user_id    String?
   created_at DateTime? @default(now())
