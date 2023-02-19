@@ -112,13 +112,14 @@ export class UsersController {
   async changePassword(@Req() req: Request, @Body() body: any) {
     const userId = req.user['sub'];
     const { oldPassword, newPassword } = body;
-    return this.usersService.changePassword(userId, oldPassword, newPassword);
+    // return this.usersService.changePassword(userId, oldPassword, newPassword);
   }
 
   @UseGuards(AccessTokenGuard)
   @Patch('forgot-password')
+
   async forgotPassword(@Body() body: any) {
     const { email } = body;
-    return this.usersService.forgotPassword(email);
+    // return this.usersService.forgotPassword(email);
   }
 }

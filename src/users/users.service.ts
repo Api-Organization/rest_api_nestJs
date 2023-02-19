@@ -1,10 +1,6 @@
 import { NodemailerService } from '@/nodemailer/nodemailer.service';
 import { PrismaService } from '@/prisma/prisma.service';
-import {
-  BadRequestException,
-  ConflictException,
-  Injectable,
-} from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateAddressDTO } from './dto/create-address.dto';
 import { UpdateUserPermissionDto } from './dto/Update-user-permission.dto';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -180,55 +176,55 @@ export class UsersService {
     });
   }
 
-  async changePassword(id: string, oldPassword: string, newPassword: string) {
-    const user = await this.prismaService.users.findUnique({
-      where: { id },
-      include: {
-        permissions: true,
-      },
-    });
+  // async changePassword(id: string, oldPassword: string, newPassword: string) {
+  //   const user = await this.prismaService.users.findUnique({
+  //     where: { id },
+  //     include: {
+  //       permissions: true,
+  //     },
+  //   });
 
-    if (!user) {
-      throw new BadRequestException('User does not exist');
-    }
+  //   if (!user) {
+  //     throw new BadRequestException('User does not exist');
+  //   }
 
-    const passwordMatches = await argon2.verify(user.password, oldPassword);
+  //   const passwordMatches = await argon2.verify(user.password, oldPassword);
 
-    if (!passwordMatches) {
-      throw new BadRequestException('Password is incorrect');
-    }
+  //   if (!passwordMatches) {
+  //     throw new BadRequestException('Password is incorrect');
+  //   }
 
-    return this.prismaService.users.update({
-      where: { id },
-      data: {
-        password: newPassword,
-      },
-    });
-  }
+  //   return this.prismaService.users.update({
+  //     where: { id },
+  //     data: {
+  //       password: newPassword,
+  //     },
+  //   });
+  // }
 
-  async forgotPassword(email: string) {
-    const user = await this.prismaService.users.findUnique({
-      where: { email },
-      include: {
-        permissions: true,
-      },
-    });
+  // async forgotPassword(email: string) {
+  //   const user = await this.prismaService.users.findUnique({
+  //     where: { email },
+  //     include: {
+  //       permissions: true,
+  //     },
+  //   });
 
-    if (!user) {
-      throw new BadRequestException('User does not exist');
-    }
+  //   if (!user) {
+  //     throw new BadRequestException('User does not exist');
+  //   }
 
-    const permissionsClean: any = user.permissions.map((permission) => {
-      return { name: permission.name, id: permission.id };
-    });
+  //   const permissionsClean: any = user.permissions.map((permission) => {
+  //     return { name: permission.name, id: permission.id };
+  //   });
 
-    const tokens = await this.authService.getTokens(user.id, permissionsClean);
-    await this.authService.updateRefreshToken(user.id, tokens.refreshToken);
+  //   const tokens = await this.authService.getTokens(user.id, permissionsClean);
+  //   await this.authService.updateRefreshToken(user.id, tokens.refreshToken);
 
-    const forgotLink = `https://api.webspy.com.br/reset-password?token=${tokens.accessToken}`;
+  //   const forgotLink = `https://api.webspy.com.br/reset-password?token=${tokens.accessToken}`;
 
-    // await this.nodemailerService.sendEmail(email);
+  //   // await this.nodemailerService.sendEmail(email);
 
-    return tokens;
-  }
+  //   return tokens;
+  // }
 }
