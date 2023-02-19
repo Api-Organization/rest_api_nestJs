@@ -23,8 +23,6 @@ export class AdheartService {
       },
     });
 
-    console.log(response);
-
     const page = await this.htmlParseService.parse(response.data);
 
     const cards = Array.from(
