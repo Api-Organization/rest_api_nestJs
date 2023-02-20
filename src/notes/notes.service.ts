@@ -13,8 +13,10 @@ export class NotesService {
     });
   }
 
-  findAll() {
-    return this.PrismaService.notes.findMany();
+  async findAll() {
+    const notes = await this.PrismaService.notes.findMany();
+    console.log(notes)
+    return notes;
   }
 
   findOne(id: string) {

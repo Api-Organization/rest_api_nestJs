@@ -14,6 +14,7 @@ Table Notes {
   id String [pk]
   title String
   content String
+  isUrgent String
   time String
   user_id String
   created_at DateTime [default: `now()`]
