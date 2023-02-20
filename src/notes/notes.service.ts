@@ -15,7 +15,6 @@ export class NotesService {
 
   async findAll() {
     const notes = await this.PrismaService.notes.findMany();
-    console.log(notes)
     return notes;
   }
 

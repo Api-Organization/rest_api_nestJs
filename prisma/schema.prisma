@@ -17,17 +17,19 @@ model Links {
   note_id    String?
   created_at DateTime? @default(now())
   notes      Notes?    @relation(fields: [note_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([note_id], map: "Links_note_id_fkey")
 }
 
 model Notes {
   id         String    @id @default(uuid())
   title      String?
-  content    String?
-  isUrgent   String?
   time       String?
   user_id    String?
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
+  content    String?
+  isUrgent   String?
   links      Links[]
 }
 
@@ -37,7 +39,7 @@ model Faq {
   answer     String
   created_at DateTime?  @default(now())
   updated_at DateTime?  @default(now())
-  Products   Products[]
+  Products   Products[] @relation("FaqToProducts")
 }
 
 model Files {
@@ -45,8 +47,8 @@ model Files {
   link       String
   created_at DateTime?   @default(now())
   updated_at DateTime?   @default(now())
-  Products   Products[]
-  Reviewers  Reviewers[]
+  Products   Products[]  @relation("FilesToProducts")
+  Reviewers  Reviewers[] @relation("FilesToReviewers")
 }
 
 model Reviewers {
@@ -55,8 +57,8 @@ model Reviewers {
   description String?
   created_at  DateTime?  @default(now())
   updated_at  DateTime?  @default(now())
-  Files       Files[]
-  Products    Products[]
+  Files       Files[]    @relation("FilesToReviewers")
+  Products    Products[] @relation("ProductsToReviewers")
 }
 
 model Accounts {
@@ -67,58 +69,57 @@ model Accounts {
   password    String?
   created_at  DateTime?     @default(now())
   updated_at  DateTime?     @default(now())
-  permissions Permissions[]
+  permissions Permissions[] @relation("AccountsToPermissions")
 }
 
 model Permissions {
   id          String     @id @default(uuid())
   name        String     @unique
-  description String?
   created_at  DateTime?  @default(now())
   updated_at  DateTime?  @default(now())
-  Accounts    Accounts[]
-  Users       Users[]
-  Products    Products[]
+  description String?
+  Accounts    Accounts[] @relation("AccountsToPermissions")
+  Products    Products[] @relation("PermissionsToProducts")
+  Users       Users[]    @relation("PermissionsToUsers")
 }
 
 model Products {
   id          String        @id @default(uuid())
-  name        String
   price       String?
   description String?
   photo       String?
   time        String?
-  active      Boolean?
-  stock       String?
   created_at  DateTime?     @default(now())
   updated_at  DateTime?     @default(now())
-  Permissions Permissions[]
-  Faq         Faq[]
-  Files       Files[]
-  Reviewers   Reviewers[]
+  name        String
+  stock       String?
+  active      Boolean?
   Payments    Payments[]
+  Faq         Faq[]         @relation("FaqToProducts")
+  Files       Files[]       @relation("FilesToProducts")
+  Permissions Permissions[] @relation("PermissionsToProducts")
+  Reviewers   Reviewers[]   @relation("ProductsToReviewers")
 }
 
 model Users {
   id                 String         @id @default(uuid())
-  stripe_customer_id String?
   name               String
   number             String?
   status             String?
   role               String?
-  isEmailConfirmed   Boolean?
   email              String         @unique
   password           String
-  plataform          String?
-  permissions        Permissions[] 
   refresh_Token      String?
   created_at         DateTime?      @default(now())
   updated_at         DateTime?      @default(now())
-  Payments           Payments[] 
-  Discount           Discount[] 
-  Address            Address[] 
-  Subscription       Subscription[] 
-
+  stripe_customer_id String?
+  isEmailConfirmed   Boolean?
+  plataform          String?
+  Address            Address[]
+  Discount           Discount[]
+  Payments           Payments[]
+  Subscription       Subscription[]
+  permissions        Permissions[]  @relation("PermissionsToUsers")
 }
 
 model Subscription {
@@ -136,6 +137,8 @@ model Subscription {
   default_payment_method String?
   metadata               String?
   Users                  Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Subscription_userId_fkey")
 }
 
 model Address {
@@ -149,13 +152,8 @@ model Address {
   metadata           String?
   userId             String
   Users              Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
 
-enum method {
-  CREDIT_CARD
-  DEBIT_CARD
-  BANK_SLIP
-  PIX
+  @@index([userId], map: "Address_userId_fkey")
 }
 
 model Payments {
@@ -165,10 +163,13 @@ model Payments {
   status     String
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
-  Users      Users     @relation(fields: [userId], references: [id],  onDelete: Cascade)
-  userId     String
   productId  String
-  products   Products  @relation(fields: [productId], references: [id],  onDelete: Cascade)
+  userId     String
+  products   Products  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  Users      Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([productId], map: "Payments_productId_fkey")
+  @@index([userId], map: "Payments_userId_fkey")
 }
 
 model Price {
@@ -201,9 +202,18 @@ model Discount {
   stripe_discount_id String
   subscription_id    String
   user_id            String
-  user               Users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
   start              DateTime
   end                DateTime
   promo_code         String
   metadata           String
+  user               Users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id], map: "Discount_user_id_fkey")
+}
+
+enum method {
+  CREDIT_CARD
+  DEBIT_CARD
+  BANK_SLIP
+  PIX
 }
