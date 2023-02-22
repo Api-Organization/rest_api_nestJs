@@ -155,4 +155,30 @@ export class UsersService {
       },
     });
   }
+  async updatePermission(
+    id: string,
+    UpdateUserPermissionDto: UpdateUserPermissionDto,
+  ) {
+    if (UpdateUserPermissionDto?.permissions_id) {
+      return this.prismaService.users.update({
+        where: { id },
+        data: {
+          permissions: {
+            connect: UpdateUserPermissionDto.permissions_id?.map((id) => ({
+              id,
+            })),
+          },
+        },
+      });
+    } else {
+      return this.prismaService.users.update({
+        where: { id },
+        data: {
+          permissions: {
+            connect: [{ id: UpdateUserPermissionDto.permission_id }],
+          },
+        },
+      });
+    }
+  }
 }

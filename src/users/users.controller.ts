@@ -94,6 +94,14 @@ export class UsersController {
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
+  @UseGuards(AccessTokenGuard)
+  @Patch('permissions/:id')
+  updatePermissions(
+    @Param('id') id: string,
+    @Body() UpdateUserPermissionDto: UpdateUserPermissionDto,
+  ) {
+    return this.usersService.updatePermission(id, UpdateUserPermissionDto);
+  }
 
   @UseGuards(AccessTokenGuard)
   @Delete(':id')

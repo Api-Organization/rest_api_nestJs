@@ -6,10 +6,15 @@ import {
   MinLength,
   IsEmail,
   IsOptional,
+  IsArray,
 } from 'class-validator';
 
 export class UpdateUserPermissionDto {
   @IsOptional()
   @IsString()
   permission_id?: string;
+
+  @IsOptional()
+  @IsArray()
+  permissions_id?: Array<string>;
 }

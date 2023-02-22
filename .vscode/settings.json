@@ -1,0 +1,8 @@
+"editor.formatOnSave": true,
+"editor.formatOnSaveMode": "modifications",
+"[javascript]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+}
+"[typescript]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
