@@ -21,7 +21,11 @@ export class DevicesService {
       data: {
         name: name,
         device: device_id,
-        userId: user.id,
+        Users: {
+          connect: {
+            id: user_id,
+          },
+        },
       },
     });
   }
@@ -33,5 +37,25 @@ export class DevicesService {
       },
     });
     return devices.length;
+  }
+
+  async checkDevice(userId: string, deviceId: string): Promise<boolean> {
+    const user = await this.prismaService.users.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        Devices: {
+          where: {
+            device: deviceId,
+          },
+        },
+      },
+    });
+
+    if (user.Devices && user.Devices.length > 0) {
+      return true;
+    }
+    return false;
   }
 }

@@ -1,4 +1,9 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
@@ -19,6 +24,8 @@ import { MulterModule } from './multer/multer.module';
 import { DevicesModule } from './devices/devices.module';
 import { PrismaService } from './prisma/prisma.service';
 import { DevicesService } from './devices/devices.service';
+import { DeviceLimitMiddleware } from './common/middleware/DeviceLimit.middleware';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -42,7 +49,13 @@ import { DevicesService } from './devices/devices.service';
     DevicesModule,
   ],
   controllers: [],
-  providers: [DevicesService, PrismaService],
+  providers: [DevicesService, PrismaService, JwtService],
   exports: [DevicesService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(DeviceLimitMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.GET });
+  }
+}

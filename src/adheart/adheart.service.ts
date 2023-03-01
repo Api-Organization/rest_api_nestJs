@@ -10,7 +10,6 @@ export class AdheartService {
   ) {}
 
   async getPage(query: string) {
-    console.log(query);
 
     const url = `https://adheart.me/teasers?${query}`;
 

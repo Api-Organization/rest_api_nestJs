@@ -121,7 +121,7 @@ model Users {
   Payments           Payments[]
   Subscription       Subscription[]
   permissions        Permissions[]  @relation("PermissionsToUsers")
-  Devices             Devices[]
+  Devices            Devices[]
 }
 
 model Devices {
@@ -132,8 +132,6 @@ model Devices {
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
   Users      Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId], map: "Device_userId_fkey")
 }
 
 model Subscription {
