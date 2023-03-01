@@ -17,6 +17,7 @@ import { EmailConfirmationService } from '@/email-confirmation/email-confirmatio
 import { CreateAddressDTO } from './dto/create-address.dto';
 import { UpdateUserPermissionDto } from './dto/Update-user-permission.dto';
 import { PermissionGuard } from '@/common/guards/permission.guard';
+import { UpdateUserDeviceLimitDto } from './dto/Update-user-limite-device.dto';
 
 @Controller('users')
 export class UsersController {
@@ -63,12 +64,28 @@ export class UsersController {
     const userId = req.user['sub'];
     const user = await this.usersService.findOne(userId);
 
-    // const email = await this.emailConfirmationService.sendVerificationLink(
-    //   user.email,
-    // );
-
     return { user };
   }
+
+  @UseGuards(AccessTokenGuard)
+  @Get('me/devices')
+  async getAllUserDevices(@Req() req: Request) {
+    const userId = req.user['sub'];
+    return await this.usersService.getAllDevices(userId);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Patch('/devices/:id')
+  async updateUserDeviceLimit(
+    @Param('id') id: string,
+    @Body() updateUserDeviceLimitDto: UpdateUserDeviceLimitDto,
+  ) {
+    return await this.usersService.updateDeviceLimit(
+      id,
+      updateUserDeviceLimitDto.device_limit,
+    );
+  }
+
   @UseGuards(AccessTokenGuard)
   @Get('email/:email')
   async findEmail(@Param('email') email: string) {

@@ -187,4 +187,21 @@ export class UsersService {
     });
     return user.deviceLimit;
   }
+
+  async updateDeviceLimit(userId: string, deviceLimit: number) {
+    return this.prismaService.users.update({
+      where: { id: userId },
+      data: { deviceLimit: deviceLimit },
+    });
+  }
+
+  async getAllDevices(userId: string) {
+    const user = await this.prismaService.users.findUnique({
+      where: { id: userId },
+      include: {
+        Devices: true,
+      },
+    });
+    return user.Devices;
+  }
 }
