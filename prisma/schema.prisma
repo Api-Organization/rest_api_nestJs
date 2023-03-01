@@ -110,6 +110,7 @@ model Users {
   email              String         @unique
   password           String
   refresh_Token      String?
+  deviceLimit        Int?
   created_at         DateTime?      @default(now())
   updated_at         DateTime?      @default(now())
   stripe_customer_id String?
@@ -120,6 +121,19 @@ model Users {
   Payments           Payments[]
   Subscription       Subscription[]
   permissions        Permissions[]  @relation("PermissionsToUsers")
+  Devices             Devices[]
+}
+
+model Devices {
+  id         String    @id @default(uuid())
+  name       String
+  userId     String
+  device     String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  Users      Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Device_userId_fkey")
 }
 
 model Subscription {

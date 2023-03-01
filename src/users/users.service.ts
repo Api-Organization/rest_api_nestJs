@@ -181,4 +181,10 @@ export class UsersService {
       });
     }
   }
+  async getDeviceLimit(userId: string): Promise<number> {
+    const user = await this.prismaService.users.findUnique({
+      where: { id: userId },
+    });
+    return user.deviceLimit;
+  }
 }

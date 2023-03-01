@@ -16,6 +16,9 @@ import { NodemailerModule } from './nodemailer/nodemailer.module';
 import { EmailConfirmationModule } from './email-confirmation/email-confirmation.module';
 import { FilesModule } from './files/files.module';
 import { MulterModule } from './multer/multer.module';
+import { DevicesModule } from './devices/devices.module';
+import { PrismaService } from './prisma/prisma.service';
+import { DevicesService } from './devices/devices.service';
 
 @Module({
   imports: [
@@ -36,7 +39,10 @@ import { MulterModule } from './multer/multer.module';
     EmailConfirmationModule,
     FilesModule,
     MulterModule,
+    DevicesModule,
   ],
   controllers: [],
+  providers: [DevicesService, PrismaService],
+  exports: [DevicesService],
 })
 export class AppModule {}

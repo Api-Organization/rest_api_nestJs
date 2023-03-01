@@ -13,12 +13,12 @@ Table Links {
 Table Notes {
   id String [pk]
   title String
-  content String
-  isUrgent String
   time String
   user_id String
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]
+  content String
+  isUrgent String
   links Links [not null]
 }
 
@@ -64,51 +64,63 @@ Table Accounts {
 Table Permissions {
   id String [pk]
   name String [unique, not null]
-  description String
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]
+  description String
   Accounts Accounts [not null]
-  Users Users [not null]
   Products Products [not null]
+  Users Users [not null]
 }
 
 Table Products {
   id String [pk]
-  name String [not null]
   price String
   description String
   photo String
   time String
-  active Boolean
-  stock String
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]
-  Permissions Permissions [not null]
+  name String [not null]
+  stock String
+  active Boolean
+  Payments Payments [not null]
   Faq Faq [not null]
   Files Files [not null]
+  Permissions Permissions [not null]
   Reviewers Reviewers [not null]
-  Payments Payments [not null]
 }
 
 Table Users {
   id String [pk]
-  stripe_customer_id String
   name String [not null]
   number String
   status String
   role String
-  isEmailConfirmed Boolean
   email String [unique, not null]
   password String [not null]
-  plataform String
-  permissions Permissions [not null]
   refresh_Token String
+  deviceLimit Int
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]
-  Payments Payments [not null]
-  Discount Discount [not null]
+  stripe_customer_id String
+  isEmailConfirmed Boolean
+  plataform String
   Address Address [not null]
+  Discount Discount [not null]
+  Payments Payments [not null]
   Subscription Subscription [not null]
+  permissions Permissions [not null]
+  Devices Devices [not null]
+}
+
+Table Devices {
+  id String [pk]
+  name String [not null]
+  userId String [not null]
+  device String [not null]
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  Users Users [not null]
 }
 
 Table Subscription {
@@ -148,10 +160,10 @@ Table Payments {
   status String [not null]
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]
-  Users Users [not null]
-  userId String [not null]
   productId String [not null]
+  userId String [not null]
   products Products [not null]
+  Users Users [not null]
 }
 
 Table Price {
@@ -184,11 +196,46 @@ Table Discount {
   stripe_discount_id String [not null]
   subscription_id String [not null]
   user_id String [not null]
-  user Users [not null]
   start DateTime [not null]
   end DateTime [not null]
   promo_code String [not null]
   metadata String [not null]
+  user Users [not null]
+}
+
+Table FaqToProducts {
+  productsId String [ref: > Products.id]
+  faqId String [ref: > Faq.id]
+}
+
+Table FilesToProducts {
+  productsId String [ref: > Products.id]
+  filesId String [ref: > Files.id]
+}
+
+Table FilesToReviewers {
+  reviewersId String [ref: > Reviewers.id]
+  filesId String [ref: > Files.id]
+}
+
+Table ProductsToReviewers {
+  productsId String [ref: > Products.id]
+  reviewersId String [ref: > Reviewers.id]
+}
+
+Table AccountsToPermissions {
+  permissionsId String [ref: > Permissions.id]
+  accountsId String [ref: > Accounts.id]
+}
+
+Table PermissionsToProducts {
+  productsId String [ref: > Products.id]
+  permissionsId String [ref: > Permissions.id]
+}
+
+Table PermissionsToUsers {
+  usersId String [ref: > Users.id]
+  permissionsId String [ref: > Permissions.id]
 }
 
 Enum method {
@@ -200,12 +247,14 @@ Enum method {
 
 Ref: Links.note_id > Notes.id [delete: Cascade]
 
+Ref: Devices.userId > Users.id [delete: Cascade]
+
 Ref: Subscription.userId > Users.id [delete: Cascade]
 
 Ref: Address.userId > Users.id [delete: Cascade]
 
-Ref: Payments.userId > Users.id [delete: Cascade]
-
 Ref: Payments.productId > Products.id [delete: Cascade]
+
+Ref: Payments.userId > Users.id [delete: Cascade]
 
 Ref: Discount.user_id > Users.id [delete: Cascade]
