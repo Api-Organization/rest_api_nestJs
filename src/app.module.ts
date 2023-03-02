@@ -56,6 +56,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(DeviceLimitMiddleware)
-      .forRoutes({ path: 'adheart', method: RequestMethod.GET });
+      .forRoutes({ path: 'adheart', method: RequestMethod.POST });
   }
 }

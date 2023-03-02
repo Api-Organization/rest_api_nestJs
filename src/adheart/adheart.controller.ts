@@ -3,6 +3,7 @@ import { PermissionGuard } from '@/common/guards/permission.guard';
 import {
   Controller,
   Get,
+  Post,
   Query,
   Req,
   Request,
@@ -15,7 +16,7 @@ export class AdheartController {
   constructor(private readonly adheartService: AdheartService) {}
 
   @UseGuards(AccessTokenGuard, PermissionGuard(['get_adheart']))
-  @Get()
+  @Post()
   async getAdheart(@Query() query: { [key: string]: string }, @Req() req: any) {
     return this.adheartService.getPage(req._parsedUrl.query);
   }

@@ -22,8 +22,12 @@ export class DeviceLimitMiddleware implements NestMiddleware {
     try {
       const authHeader = req.headers['authorization'];
       const token = authHeader && authHeader.split(' ')[1];
-      const deviceId = req.headers['device_id'] as string;
-      const deviceName = req.headers['device_name'] as string;
+      const deviceId = req.body.device_id;
+
+
+      const deviceName = req.body.device_name;
+      console.log('Device ID: ', deviceId);
+      console.log('Device Name: ', deviceName);
       const decodedToken = await this.decodeToken(token);
       const user = decodedToken;
 
