@@ -75,7 +75,7 @@ export class UsersController {
   }
 
   @UseGuards(AccessTokenGuard)
-  @Patch('/devices/:id')
+  @Patch('devices/:id')
   async updateUserDeviceLimit(
     @Param('id') id: string,
     @Body() updateUserDeviceLimitDto: UpdateUserDeviceLimitDto,

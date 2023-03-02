@@ -48,7 +48,7 @@ export class DeviceLimitMiddleware implements NestMiddleware {
 
       if (!checkDevice) {
         if (deviceCount >= maxDeviceCount) {
-          return res.status(400).json({
+          return res.status(401).json({
             message: 'Maximum device limit exceeded',
           });
         }
@@ -57,7 +57,6 @@ export class DeviceLimitMiddleware implements NestMiddleware {
 
       next();
     } catch (err) {
-      console.log(err);
       return res.status(401).json({
         message: 'Invalid or expired token',
       });
