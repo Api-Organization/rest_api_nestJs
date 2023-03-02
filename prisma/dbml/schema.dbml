@@ -203,41 +203,6 @@ Table Discount {
   user Users [not null]
 }
 
-Table FaqToProducts {
-  productsId String [ref: > Products.id]
-  faqId String [ref: > Faq.id]
-}
-
-Table FilesToProducts {
-  productsId String [ref: > Products.id]
-  filesId String [ref: > Files.id]
-}
-
-Table FilesToReviewers {
-  reviewersId String [ref: > Reviewers.id]
-  filesId String [ref: > Files.id]
-}
-
-Table ProductsToReviewers {
-  productsId String [ref: > Products.id]
-  reviewersId String [ref: > Reviewers.id]
-}
-
-Table AccountsToPermissions {
-  permissionsId String [ref: > Permissions.id]
-  accountsId String [ref: > Accounts.id]
-}
-
-Table PermissionsToProducts {
-  productsId String [ref: > Products.id]
-  permissionsId String [ref: > Permissions.id]
-}
-
-Table PermissionsToUsers {
-  usersId String [ref: > Users.id]
-  permissionsId String [ref: > Permissions.id]
-}
-
 Enum method {
   CREDIT_CARD
   DEBIT_CARD
