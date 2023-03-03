@@ -36,6 +36,7 @@ export class DevicesService {
         userId,
       },
     });
+
     return devices.length;
   }
 

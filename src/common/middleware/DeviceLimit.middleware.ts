@@ -24,7 +24,6 @@ export class DeviceLimitMiddleware implements NestMiddleware {
       const token = authHeader && authHeader.split(' ')[1];
       const deviceId = req.body.device_id;
 
-
       const deviceName = req.body.device_name;
       console.log('Device ID: ', deviceId);
       console.log('Device Name: ', deviceName);
@@ -51,7 +50,7 @@ export class DeviceLimitMiddleware implements NestMiddleware {
       );
 
       if (!checkDevice) {
-        if (deviceCount >= maxDeviceCount) {
+        if (deviceCount >= maxDeviceCount && deviceCount !== 0) {
           return res.status(401).json({
             message: 'Maximum device limit exceeded',
           });

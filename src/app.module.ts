@@ -26,6 +26,7 @@ import { PrismaService } from './prisma/prisma.service';
 import { DevicesService } from './devices/devices.service';
 import { DeviceLimitMiddleware } from './common/middleware/DeviceLimit.middleware';
 import { JwtService } from '@nestjs/jwt';
+import { AdsereaModule } from './adserea/adserea.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { JwtService } from '@nestjs/jwt';
     FilesModule,
     MulterModule,
     DevicesModule,
+    AdsereaModule,
   ],
   controllers: [],
   providers: [DevicesService, PrismaService, JwtService],
