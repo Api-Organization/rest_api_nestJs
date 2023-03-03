@@ -99,7 +99,7 @@ Table Users {
   email String [unique, not null]
   password String [not null]
   refresh_Token String
-  deviceLimit Int
+  deviceLimit Int [default: 4]
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]
   stripe_customer_id String

@@ -185,6 +185,7 @@ export class UsersService {
     const user = await this.prismaService.users.findUnique({
       where: { id: userId },
     });
+    console.log(user?.deviceLimit, user)
     return user.deviceLimit;
   }
 

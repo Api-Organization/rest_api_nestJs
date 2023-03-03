@@ -50,6 +50,8 @@ export class DeviceLimitMiddleware implements NestMiddleware {
       );
 
       if (!checkDevice) {
+        console.log('Device Count: ', deviceCount);
+        console.log('maxDeviceCount: ', maxDeviceCount);
         if (deviceCount >= maxDeviceCount && deviceCount !== 0) {
           return res.status(401).json({
             message: 'Maximum device limit exceeded',

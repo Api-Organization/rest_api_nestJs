@@ -10,7 +10,6 @@ export class AdheartService {
   ) {}
 
   async getPage(query: string) {
-
     const url = `https://adheart.me/teasers?${query}`;
 
     const response = await this.httpService.axiosRef({
