@@ -1,6 +1,6 @@
 import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
 import { PermissionGuard } from '@/common/guards/permission.guard';
-import { Controller, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { AdsereaService } from './adserea.service';
 
 @Controller('adserea')
@@ -24,7 +24,13 @@ export class AdsereaController {
 
   @UseGuards(AccessTokenGuard)
   @Post('live')
-  async getAdsereaLive(){
+  async getAdsereaLive() {
     return this.adsereaService.getPageLive();
+  }
+  
+  @UseGuards(AccessTokenGuard)
+  @Get('store')
+  async getAdsereaStore() {
+    return this.adsereaService.getPageStore();
   }
 }
