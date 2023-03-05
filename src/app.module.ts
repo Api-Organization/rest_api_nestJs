@@ -27,6 +27,7 @@ import { DevicesService } from './devices/devices.service';
 import { DeviceLimitMiddleware } from './common/middleware/DeviceLimit.middleware';
 import { JwtService } from '@nestjs/jwt';
 import { AdsereaModule } from './adserea/adserea.module';
+import { PipiadsModule } from './pipiads/pipiads.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { AdsereaModule } from './adserea/adserea.module';
     MulterModule,
     DevicesModule,
     AdsereaModule,
+    PipiadsModule,
   ],
   controllers: [],
   providers: [DevicesService, PrismaService, JwtService],
