@@ -10,6 +10,107 @@ export class AdsereaService {
     private readonly httpService: HttpService,
   ) {}
   async getPageHome(query: string) {
+    console.log(query);
+    if (query) {
+      const url = `https://clients.adserea.com/portal/tiktok-spy?q={${query}}`;
+      const response = await this.httpService.axiosRef({
+        baseURL: url,
+        method: 'POST',
+        headers: {
+          'Accept-Language': 'en-US,en;q=0.5',
+          Accept:
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          Referer: 'https://adserea.com/',
+          'User-Agent':
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+          'Accept-Encoding': 'gzip,deflate,compress',
+          Cookie:
+            '_country=br; _y=997244f9-4b88-45e5-9e78-4b958578e02c; _shopify_y=997244f9-4b88-45e5-9e78-4b958578e02c; _cmp_a=%7B%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Atrue%7D%2C%22display_banner%22%3Afalse%2C%22merchant_geo%22%3A%22US%22%2C%22sale_of_data_region%22%3Afalse%7D; _orig_referrer=; _landing_page=%2F; G_ENABLED_IDPS=google; _s=58cdea60-8d78-4376-8040-fa470d516534; _shopify_s=58cdea60-8d78-4376-8040-fa470d516534; _shopify_sa_p=; _shopify_sa_t=2023-03-02T23%3A17%3A29.718Z; connect.sid=s%3A4das8Cazi7T2cE9bLQrsfg1r6rHc7Lqc.np5E0xQjAg%2FxkulRvOn8x7bPizTWMM3CKNJS8mAmyKQ; AMP_9bdc728a74={"deviceId":"f384ab98-cf0c-424a-ac83-9372edeea63f","sessionId":1677799057348,"lastEventTime":1677799057348,"optOut":false}',
+        },
+      });
+
+      const page = await this.htmlParseService.parse(response.data.html);
+
+      const cards = Array.from(
+        page.querySelectorAll(
+          'div.gridv.responsive.gp-m > div.col.gp-lg.tt_card',
+        ),
+        (value, index) => ({
+          cardHeader: {
+            img: value.querySelector(
+              'div.row.gp-sm.ai-center.wr-wrap.jc-sp-between > img',
+            )?.attributes?.src,
+            title: value
+              .querySelector(
+                'div.row.gp-sm.ai-center.wr-wrap.jc-sp-between > div.col > span.fs-xs',
+              )
+              ?.innerText?.replace(/\n/g, ''),
+            country: {
+              // img: value.querySelector(
+              //   'div.row.gp-sm.ai-center.wr-wrap.jc-sp-between > div.col > div.row.gp-sm > i',
+              // ),
+              name: value
+                .querySelector(
+                  'div.row.gp-sm.ai-center.wr-wrap.jc-sp-between > div.col > div.row.gp-sm > span.fs-xs',
+                )
+                ?.innerText?.replace(/\n/g, ''),
+            },
+          },
+          cardDate: {
+            title: value
+              .querySelector('div.row.gp-sm.jc-sp-between > div.fs-xs')
+              ?.innerText?.replace(/\n/g, ''),
+          },
+          cardCreative: {
+            video: value.querySelector('div.video.fl-one > video > source')
+              ?.attributes?.src,
+          },
+          cardDescription: {
+            title: value
+              .querySelector(
+                'div.col.gp-sm.jc-center.wr-wrap > div.col > span.fs-xs.fw-bs.tx-synopsis',
+              )
+              ?.innerHTML?.replace(/\n/g, ''),
+          },
+          cardFooter: {
+            views: value
+              .querySelector(
+                'div.info.row.gp-sm.jc-sp-even.ai-center.wr-wrap > div.col.gp-sm.ai-center.wr-wrap > span.fs-lg.fw-bs',
+              )
+              ?.innerText?.replace(/\n/g, ''),
+            days: value
+              .querySelectorAll(
+                'div.info.row.gp-sm.jc-sp-even.ai-center.wr-wrap > div.col.gp-sm.ai-center.wr-wrap > span.fs-lg.fw-bs',
+              )[1]
+              ?.innerText?.replace(/\n/g, ''),
+            Popularity: value
+              .querySelectorAll(
+                'div.info.row.gp-sm.jc-sp-even.ai-center.wr-wrap > div.col.gp-sm.ai-center.wr-wrap > span.fs-lg.fw-bs',
+              )[2]
+              ?.innerText?.replace(/\n/g, ''),
+          },
+          creativeId: value.querySelector(
+            'div.button.btn_primary.w100.btn_details',
+          ).attributes['data-target'],
+        }),
+      );
+
+      const regex = /var\s+totalPages\s*=\s*"(\d+)"/;
+
+      const match = response.data.html.match(regex);
+
+      if (match) {
+        const totalPagesValue = match[1];
+        console.log(totalPagesValue); // Output: 1553651
+      }
+
+      const pagination = {
+        totalPagesValue: match[1],
+      };
+
+      return { cards, pagination };
+    }
+
     const url = `https://clients.adserea.com/portal/tiktok-spy`;
 
     const response = await this.httpService.axiosRef({
@@ -94,7 +195,25 @@ export class AdsereaService {
       }),
     );
 
-    return { cards };
+    const totalPagesRegex = /var\s+totalPages\s*=\s*"(\d+)"/;
+
+    const totalPagesMatch = response.data.html.match(totalPagesRegex);
+
+    const pageNumberRegex = /var\s+pageNumber\s*=\s*"(\d+)"/;
+
+    const pageNumberMatch = response.data.html.match(pageNumberRegex);
+
+    const pageSizeRegex = /var\s+pageSize\s*=\s*"(\d+)"/;
+
+    const pageSizeMatch = response.data.html.match(pageSizeRegex);
+
+    const pagination = {
+      totalPagesValue: totalPagesMatch[1],
+      pageNumber: pageNumberMatch[1],
+      pageSize: pageSizeMatch[1],
+    };
+
+    return { cards, pagination };
   }
   async getPageDetails(query: string) {
     const url = `https://clients.adserea.com/portal/tiktok-spy/tt`;
@@ -232,8 +351,25 @@ export class AdsereaService {
         )?.attributes['data-url'],
       },
     };
+    const totalPagesRegex = /var\s+totalPages\s*=\s*"(\d+)"/;
 
-    return card;
+    const totalPagesMatch = response.data.html.match(totalPagesRegex);
+
+    const pageNumberRegex = /var\s+pageNumber\s*=\s*"(\d+)"/;
+
+    const pageNumberMatch = response.data.html.match(pageNumberRegex);
+
+    const pageSizeRegex = /var\s+pageSize\s*=\s*"(\d+)"/;
+
+    const pageSizeMatch = response.data.html.match(pageSizeRegex);
+
+    const pagination = {
+      totalPagesValue: totalPagesMatch[1],
+      pageNumber: pageNumberMatch[1],
+      pageSize: pageSizeMatch[1],
+    };
+
+    return { card, pagination };
   }
 
   async getPageLive() {
