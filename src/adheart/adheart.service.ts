@@ -10,27 +10,28 @@ export class AdheartService {
   ) {}
 
   async getPage(query: string) {
-    const url = `https://adheart.me/teasers?${query}`;
+    // const url = `https://adheart.me/teasers?${query}`;
 
-    const response = await this.httpService.axiosRef({
-      baseURL: url,
-      method: 'GET',
-      headers: {
-        'Accept-Language': 'en-US,en;q=0.5',
-        Accept:
-          'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        Referer: 'https://adheart.me/',
-        'User-Agent':
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-        'Accept-Encoding': 'gzip,deflate,compress',
-        Cookie:
-          '_language=ru; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzgzMTkxMTYsImV4cCI6MTY4NjA5NTExNiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiMjI4MDQyIn0.ZpntRA1EUbZOVif5Ih3YvkO1s7E-SPRTf5hRE4adDsz9sCqr69kiyig9zQPYURPDVZ5Y4t2vnqRzPPmJpZr9WjS07fPbNLN7kCPqLOKmYp1H-Fuifl0q11sUSF_HicG1vnlPbFEkxEA3tgeD0usgDmdNTF-M9txGC3Pjx3CX7XxGmNvydGFw3fTDQJsdJG8L6iXJAq-TuPTSkyxgbYTdXHYp3KMJC6yX4ZMzm2TOmxlk_yHAwBLYevR85IHiWwHCIS7BjkOig9DNDQQvoa_CcYb_z8vjMbgN0K8CAl9YI-5WfNgkJH4dwow4HSGQ2ty4cRrirE5vHHD9FbBD0nishQ; hash=UfSKrClKqzZ2sHt86xQgGhJEgFXjStSh; reflink=GAOHEXy; _aid=37f941488919748a114881c65b368b51',
-      },
-    });
+    // const response = await this.httpService.axiosRef({
+    //   baseURL: url,
+    //   method: 'GET',
+    //   headers: {
+    //     'Accept-Language': 'en-US,en;q=0.5',
+    //     Accept:
+    //       'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    //     Referer: 'https://adheart.me/',
+    //     'User-Agent':
+    //       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+    //     'Accept-Encoding': 'gzip,deflate,compress',
+    //     Cookie:
+    //       '_language=ru; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzgzMTkxMTYsImV4cCI6MTY4NjA5NTExNiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiMjI4MDQyIn0.ZpntRA1EUbZOVif5Ih3YvkO1s7E-SPRTf5hRE4adDsz9sCqr69kiyig9zQPYURPDVZ5Y4t2vnqRzPPmJpZr9WjS07fPbNLN7kCPqLOKmYp1H-Fuifl0q11sUSF_HicG1vnlPbFEkxEA3tgeD0usgDmdNTF-M9txGC3Pjx3CX7XxGmNvydGFw3fTDQJsdJG8L6iXJAq-TuPTSkyxgbYTdXHYp3KMJC6yX4ZMzm2TOmxlk_yHAwBLYevR85IHiWwHCIS7BjkOig9DNDQQvoa_CcYb_z8vjMbgN0K8CAl9YI-5WfNgkJH4dwow4HSGQ2ty4cRrirE5vHHD9FbBD0nishQ; hash=UfSKrClKqzZ2sHt86xQgGhJEgFXjStSh; reflink=GAOHEXy; _aid=37f941488919748a114881c65b368b51',
+    //   },
+    // });
 
-    console.log(response.data)
+    // console.log(response.data)
 
-    const page = await this.htmlParseService.parse(response.data);
+    // const page = await this.htmlParseService.parse(response.data);
+    const page = await this.htmlParseService.parse('teste');
 
     const cards = Array.from(
       page.querySelectorAll('div.card-blog'),
