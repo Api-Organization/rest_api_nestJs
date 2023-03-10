@@ -28,9 +28,17 @@ import { DeviceLimitMiddleware } from './common/middleware/DeviceLimit.middlewar
 import { JwtService } from '@nestjs/jwt';
 import { AdsereaModule } from './adserea/adserea.module';
 import { PipiadsModule } from './pipiads/pipiads.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
+import { NestCrawlerModule } from 'nest-crawler';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 10,
+      limit: 2,
+    }),
+    NestCrawlerModule,
     UsersModule,
     PrismaModule,
     AuthModule,
@@ -53,7 +61,15 @@ import { PipiadsModule } from './pipiads/pipiads.module';
     PipiadsModule,
   ],
   controllers: [],
-  providers: [DevicesService, PrismaService, JwtService],
+  providers: [
+    DevicesService,
+    PrismaService,
+    JwtService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
   exports: [DevicesService],
 })
 export class AppModule implements NestModule {

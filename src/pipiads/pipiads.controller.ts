@@ -1,5 +1,12 @@
 import { AccessTokenGuard } from '@/common/guards/accessToken.guard';
-import { Controller, HttpCode, Post, Query, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  HttpCode,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { PipiadsService } from './pipiads.service';
 
 @Controller('pipiads')
