@@ -29,6 +29,8 @@ export class AdheartService {
     });
 
     const page = await this.htmlParseService.parse(response.data);
+    console.log(response.data)
+    console.log(response)
 
     const cards = Array.from(
       page.querySelectorAll('div.card-blog'),
