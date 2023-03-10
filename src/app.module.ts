@@ -38,6 +38,7 @@ import { NestCrawlerModule } from 'nest-crawler';
       ttl: 60 * 20,
       limit: 400,
     }),
+
     NestCrawlerModule,
     UsersModule,
     PrismaModule,
