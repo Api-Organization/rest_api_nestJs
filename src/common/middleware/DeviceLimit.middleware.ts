@@ -42,6 +42,11 @@ export class DeviceLimitMiddleware implements NestMiddleware {
           message: 'Device NAME is required',
         });
       }
+      if (!user_agent) {
+        return res.status(400).json({
+          message: 'user_agent NAME is required',
+        });
+      }
       const deviceCount = await this.devicesService.getDeviceCount(user.sub);
       const maxDeviceCount = await this.usersService.getDeviceLimit(user.sub);
 
