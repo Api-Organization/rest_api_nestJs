@@ -117,6 +117,7 @@ Table Devices {
   id String [pk]
   name String [not null]
   userId String [not null]
+  user_agent String [not null]
   device String [not null]
   created_at DateTime [default: `now()`]
   updated_at DateTime [default: `now()`]

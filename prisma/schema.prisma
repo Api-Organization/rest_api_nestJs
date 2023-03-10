@@ -130,6 +130,7 @@ model Devices {
   id         String    @id @default(uuid())
   name       String
   userId     String
+  user_agent String
   device     String
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())

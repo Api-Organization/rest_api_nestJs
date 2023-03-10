@@ -9,6 +9,7 @@ export class DevicesService {
     user_id: string,
     name: string,
     device_id: string,
+    user_agent: string,
   ): Promise<any> {
     const user = await this.prismaService.users.findUnique({
       where: { id: user_id },
@@ -21,6 +22,7 @@ export class DevicesService {
       data: {
         name: name,
         device: device_id,
+        user_agent: user_agent,
         Users: {
           connect: {
             id: user_id,

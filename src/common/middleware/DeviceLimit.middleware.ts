@@ -21,6 +21,7 @@ export class DeviceLimitMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     try {
       const authHeader = req.headers['authorization'];
+      const user_agent = req.headers['user-agent'];
       const token = authHeader && authHeader.split(' ')[1];
       const deviceId = req.body.device_id;
 
@@ -57,7 +58,12 @@ export class DeviceLimitMiddleware implements NestMiddleware {
             message: 'Maximum device limit exceeded',
           });
         }
-        await this.devicesService.addDevice(user.sub, deviceName, deviceId);
+        await this.devicesService.addDevice(
+          user.sub,
+          deviceName,
+          deviceId,
+          user_agent,
+        );
       }
 
       next();
