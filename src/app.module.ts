@@ -35,8 +35,8 @@ import { NestCrawlerModule } from 'nest-crawler';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 10,
+      ttl: 60 * 60 * 24,
+      limit: 1000,
     }),
     NestCrawlerModule,
     UsersModule,

@@ -9,6 +9,7 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { AdheartService } from './adheart.service';
 
 @Controller('adheart')
@@ -17,6 +18,7 @@ export class AdheartController {
 
   @UseGuards(AccessTokenGuard, PermissionGuard(['get_adheart']))
   @Post()
+  @Throttle(4, 60)
   async getAdheart(@Query() query: { [key: string]: string }, @Req() req: any) {
     return this.adheartService.getPage(req._parsedUrl.query);
   }
