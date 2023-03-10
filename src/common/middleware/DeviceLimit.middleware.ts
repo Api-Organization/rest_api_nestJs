@@ -47,7 +47,7 @@ export class DeviceLimitMiddleware implements NestMiddleware {
 
       const checkDevice = await this.devicesService.checkDevice(
         user.sub,
-        deviceId,
+        user_agent,
       );
 
       if (!checkDevice) {

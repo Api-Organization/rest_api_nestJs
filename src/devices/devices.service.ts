@@ -42,7 +42,7 @@ export class DevicesService {
     return devices.length;
   }
 
-  async checkDevice(userId: string, deviceId: string): Promise<boolean> {
+  async checkDevice(userId: string, user_agent: string): Promise<boolean> {
     const user = await this.prismaService.users.findUnique({
       where: {
         id: userId,
@@ -50,7 +50,7 @@ export class DevicesService {
       include: {
         Devices: {
           where: {
-            device: deviceId,
+            user_agent: user_agent,
           },
         },
       },
