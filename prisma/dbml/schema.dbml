@@ -90,6 +90,19 @@ Table Products {
   Reviewers Reviewers [not null]
 }
 
+Table Requests {
+  id String [pk]
+  url String
+  method String
+  body String
+  cookies String
+  status Boolean
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+  tools String
+  description String
+}
+
 Table Users {
   id String [pk]
   name String [not null]

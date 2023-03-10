@@ -103,6 +103,19 @@ model Products {
   Reviewers   Reviewers[]   @relation("ProductsToReviewers")
 }
 
+model Requests {
+  id          String    @id @default(uuid())
+  url         String?    
+  method      String?
+  body        String?
+  cookies     String?
+  status      Boolean?
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+  tools       String?
+  description String?
+}
+
 model Users {
   id                 String         @id @default(uuid())
   name               String

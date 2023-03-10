@@ -31,6 +31,7 @@ import { PipiadsModule } from './pipiads/pipiads.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { NestCrawlerModule } from 'nest-crawler';
+import { RequestsModule } from './requests/requests.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { NestCrawlerModule } from 'nest-crawler';
     DevicesModule,
     AdsereaModule,
     PipiadsModule,
+    RequestsModule,
   ],
   controllers: [],
   providers: [
