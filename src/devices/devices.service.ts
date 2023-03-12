@@ -61,4 +61,32 @@ export class DevicesService {
     }
     return false;
   }
+  async deleteDevice(userId: string, deviceId: string): Promise<any> {
+    const user = await this.prismaService.users.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        Devices: {
+          where: {
+            id: deviceId,
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found.`);
+    }
+
+    if (user.Devices && user.Devices.length > 0) {
+      return await this.prismaService.devices.delete({
+        where: {
+          id: deviceId,
+        },
+      });
+    } else {
+      throw new Error(`Device with ID ${deviceId} not found.`);
+    }
+  }
 }
