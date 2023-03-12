@@ -66,6 +66,7 @@ export class UsersService {
               products: true,
             },
           },
+          Devices: true,
         },
       })
       .then((user) => {
@@ -78,7 +79,11 @@ export class UsersService {
 
   async findAll(skip: number, take: number) {
     const [users, total] = await this.prismaService.$transaction([
-      this.prismaService.users.findMany({ skip, take }),
+      this.prismaService.users.findMany({
+        skip,
+        take,
+        include: { permissions: true, Payments: true, Devices: true },
+      }),
       this.prismaService.users.count(),
     ]);
 
@@ -185,7 +190,7 @@ export class UsersService {
     const user = await this.prismaService.users.findUnique({
       where: { id: userId },
     });
-    console.log(user?.deviceLimit, user)
+    console.log(user?.deviceLimit, user);
     return user.deviceLimit;
   }
 
