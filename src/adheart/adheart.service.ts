@@ -24,7 +24,7 @@ export class AdheartService {
           'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
         'Accept-Encoding': 'gzip,deflate,compress',
         Cookie:
-          'PHPSESSID=5643b82ad3c57f5fd14eba02ed2a71f7; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Nzg1NjQxODYsImV4cCI6MTY4NjM0MDE4Niwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiMjIyMTk4In0.FS9IIKY5h70WTWxWTiA1uTzT6xNDfwNOP5kK6Pz6holh2xzhPiXuQ6BIyTJQXGhmbdNF2Q3bS5qWBbD7VMjY4JxQkyAj6V0nr7jyQKKGyGzpfkbW2bntCAjRvNqzHrT21V0eEwR3LeNGggOAvbPhJq5xPkKw50X4QD9PBYFUrsyHnYBic6mOPcunV4Ui_XRnZBsP--Cyd_qZJrofGcGhpK5bZfRUN7DFtZCX_-4woeswBM2se5r4OU63HhnOFhrDhFg3jQamIkk1TSq2im2wzOs-CCfl7JhE-dyJMe0FQ7KoepWuRLI-G_G8vSQSl5ypHxBULITj2UXWeBTnxB01cg; hash=uP1wU5pE5sjdPfnKrnZZODMRPdG3nOCo; PHPSESSID=5643b82ad3c57f5fd14eba02ed2a71f7',
+          'PHPSESSID=bfabd9f8b16f7bfe480e569fc16463a1; _language=ru; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NzgzNzIwMjcsImV4cCI6MTY4NjE0ODAyNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiMjI5MDc2In0.FL5wd4DIqJJixzHTzaL8w1WiWVLqrGNMzCgiBPw3-HZzaKSZZ7yhn98yYsPq-Iz_JPpLP9hIjP6jx1sBHNXZ9tq5Z9vxuL-WGh6JPAhR4xWKYFEAOSxd0C3I1ZBq8GJ-X0iR1o-MDSuIIGL1czT2dhguP5wcyppYD_o66r5ibjkX5pL2rAgtTEXnfxCDA7Q1jov6Ku5oUTqrY9Qk8tJuLb-jvyPX6M3JHaNHAio_fDCE9B8bFueA9cDAqTkdimZBa0YWcenwZaBIhtTE57mju1q_riBvmzI3jpTI0EGpo8YnGVk1xUSLv411hiW4kzgaulEI7UuvyYO7mN1p1aRs1A; hash=nT00QE6fbmjcOztLlAfKtXBjIcrQih1y; PHPSESSID=16081d7a543af1f397945c7b67051c4a',
       },
     });
 
