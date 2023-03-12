@@ -18,7 +18,7 @@ export class AdheartController {
 
   @UseGuards(AccessTokenGuard, PermissionGuard(['get_adheart']))
   @Post()
-  @Throttle(200, 60 * 60 * 24)
+  @Throttle(200, 60)
   async getAdheart(@Query() query: { [key: string]: string }, @Req() req: any) {
     return this.adheartService.getPage(req._parsedUrl.query);
   }
